@@ -1,0 +1,6 @@
+{
+    "port": 3443,
+
+    "certPath": "/mnt/c/Users/Leung/Documents/tls/localhost.crt",
+    "keyPath": "/mnt/c/Users/Leung/Documents/tls/localhost.key"
+}
