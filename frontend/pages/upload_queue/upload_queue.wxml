@@ -1,0 +1,21 @@
+<!--pages/upload_queue/upload_queue.wxml-->
+<view class="container">
+    <view class="item-sec">
+        <view class="image-sec">
+            <image class="image-sec__image" mode="aspectFit" src="../../res/image/0.png"/>
+        </view>
+        <view class="text-sec">
+            <text class="text-sec__title">识别结果</text>
+            <view class="text-sec__result-sec">
+                <text class="text-sec__result-text">测试</text>
+                <i class="text-sec__result-update-btn fa fa-pencil"></i>
+            </view>
+            <view class="text-sec__line"></view>
+            <view class="text-sec__states-sec">
+                <i class="text-sec__states-icon fa fa-spinner fa-spin"></i>
+                <text class="text-sec__states-text">上传中</text>
+            </view>
+        </view>
+    </view>
+    
+</view>

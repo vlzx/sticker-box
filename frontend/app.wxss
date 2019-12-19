@@ -1,0 +1,16 @@
+/**app.wxss**/
+@import "res/font/font.wxss";
+@import "res/icon/font-awesome.wxss";
+page {
+  height: 100%;
+}
+.container {
+  height: 100%;
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  font-family: 'syht-normal';
+  font-size: 12px;
+} 

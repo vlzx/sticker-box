@@ -1,0 +1,48 @@
+/* Pages/feedback/feedback.wxss */
+page{
+  height: 100%;
+  width: 100%;
+  background-color: #F8F8F8 ;
+}
+.feedback{
+  position: relative;
+  height: 20%;
+  top: 3%;
+  width: 710rpx;
+  border: 20rpx solid #FFFFFF;
+  background-color: #FFFFFF;
+  
+}
+.email{
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 6%;
+}
+.email-title{
+  color: #101010;
+  background-color: #FFFFFF;
+  height: 90rpx;
+  width: 20%;
+  line-height: 90rpx;
+  font-size: 30rpx;
+  font-family: Arial;
+  text-align: center;
+}
+.email-input{
+  height: 70rpx;
+  width:80%;
+  padding:10rpx 20rpx 10rpx 20rpx;
+  background-color: #FFFFFF;
+}
+.feedback-placeholder{
+  color: rgba(170, 170, 170, 1);
+  font-size: 30rpx;
+  font-family: Arial;
+}
+button{
+  position: relative;
+  width: 80%;
+  top:10%;
+}
