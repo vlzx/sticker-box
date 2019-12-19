@@ -3,3 +3,6 @@ node_modules/
 
 package-lock.json
 config-dev.js
+
+#ignore folder: frontend
+frontend/
