@@ -1,0 +1,13 @@
+[Unit]
+Description=Sticker Management Tool Back-end
+After=network.target
+
+[Service]
+WorkingDirectory=/root/sticker-box
+ExecStart=/usr/bin/node main.js
+Environment=NODE_ENV=production
+Restart=on-failure
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
