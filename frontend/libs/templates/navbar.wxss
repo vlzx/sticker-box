@@ -1,0 +1,15 @@
+/* libs/templates/navbar.wxss */
+.navbar{
+    position: fixed;
+    top: 0px;
+    height: 50rpx;
+    width: 100%;
+    background-color: red;
+}
+.navbar__background{
+    position: fixed;
+    top: 0px;
+    height: 50rpx;
+    width: 100%;
+    background-color: red;
+}

@@ -1,0 +1,9 @@
+<!--libs/templates/navbar.wxml-->
+<template name="navbar">
+    <view class="navbar__background">
+        <view class="navbar__icon-sec">
+            <i class="{{navbar__icon}}"></i>
+        </view>
+        <view class="navbar__title">{{navbar__title}}</view>
+    </view>
+</template>

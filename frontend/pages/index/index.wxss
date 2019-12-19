@@ -1,0 +1,168 @@
+/**index.wxss**/
+@import "../../res/font/font.wxss";
+
+page {
+  height: 100%;
+}
+/*导航栏
+--------------------------*/
+.navbar{
+  position: fixed;
+    top: 0px;
+    height: 50rpx;
+    width: 100%;
+    background-color: red;
+}
+
+
+
+/*内容容器模块
+--------------------------*/
+.container {
+  height: 100%;
+  background-color: #F5F5F5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.menu-btn-sec {
+  position: fixed;
+  align-self: flex-start;
+  left: 50rpx;
+  top: 70rpx;
+
+}
+
+.menu-icon {
+  font-size: 18px;
+}
+
+/*上半区域（含标题，状态和搜索框）
+----------------------------*/
+.header-sec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-around;
+  width: 60%;
+  flex: 4;
+}
+
+/* 标题区域 */
+.title-sec {
+  margin-top: 40%;
+  flex: 2;
+  align-self: flex-start;
+}
+
+.title-sec__text {
+  font-family: 'syht-bold';
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* 状态区域 */
+.state-sec {
+  flex: 1;
+  margin-top: 5%;
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+.state-sec__icon {
+  height: 30rpx;
+  width: 30rpx;
+}
+
+/* 搜索框区域 */
+.search-sec {
+  flex: 3;
+  width: 100%;
+  margin-bottom: 50rpx;
+}
+
+.search-sec__icon {
+  height: 40rpx;
+  width: 40rpx;
+}
+
+.search-sec__input {
+  height: 70rpx;
+  background-color: white;
+
+}
+
+/* 搜索结果区域 
+----------------------------*/
+.search-result-scrosec {
+  flex: 6;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.search-result-sec__result-sec {
+  flex: 1 330rpx;
+  max-width: 330rpx;
+  height: 330rpx;
+  margin-top: 60rpx;
+}
+
+.search-result-sec__result-pic {
+  width: 100%;
+  height: 100%;
+}
+
+.add-pic-sec {
+  position: fixed;
+  bottom: 60rpx;
+  right: 60rpx;
+  height: 100rpx;
+  width: 100rpx;
+}
+
+/*添加图片按钮*/
+.add-pic-btn {
+  width: 100%;
+  height: 100%;
+}
+
+/*遮罩层以及菜单
+---------------------------*/
+.mask{
+  position: fixed;
+  top: 0px;
+  background-color: #9D9A9A;
+  opacity: 0.33;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+.popup-menu{
+  position: fixed;
+  top: 140rpx;
+  left: 20rpx;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  background-color: white;
+  z-index: 3;
+}
+.menu-item{
+  display: flex;
+  flex-direction: row;
+  height: 110rpx;
+  width: 100%;
+  align-items: center;
+}
+.menu-item__text{
+  height: 40rpx;
+  margin-left: 40rpx;
+  font-size: 15px;
+  font-weight: bold;
+}

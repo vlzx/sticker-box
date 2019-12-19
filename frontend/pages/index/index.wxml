@@ -1,0 +1,64 @@
+<!-- index.wxml -->
+<import src="../../libs/templates/navbar.wxml"/>
+<template is="navbar" data="{{navbarConfig}}"></template>
+<view class="navbar">
+  <view class="navbar__icon-sec">
+            <i class="navbar__icon"></i>
+        </view>
+        <view class="navbar__title">{{navbar__title}}</view>
+</view>
+<view class="container">
+  <view class="menu-btn-sec" catchtap="onTapMenuIcon">
+    <i class="fa fa-bars menu-icon"></i>
+  </view>
+  <view class="header-sec">
+    <view class="title-sec">
+      <text class="title-sec__text">Hi,{{nickname}}\n晚上好~搜索一下吧~</text>
+    </view>
+    <view class="state-sec">
+      <!-- image class="state-sec__icon" / -->
+      <i class="fa fa-hashtag"></i>
+      <text class="state-sec__text">已有表情数量 121{{picAmount}}</text>
+    </view>
+    <view class="search-sec">
+      <image class="search-sec__icon" />
+      <input class="search-sec__input" />
+    </view>
+  </view>
+  <scroll-view scroll-y="true" enable-flex="true" class="search-result-scrosec">
+    <!--view class="search-result-sec__result-sec">
+      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
+    </view>
+    <view class="search-result-sec__result-sec">
+      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
+    </view>
+    <view class="search-result-sec__result-sec">
+      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
+    </view-->
+    <view wx:for="{{searchResultList}}" class="search-result-sec__result-sec" catch:tap="onTapPreviewImage">
+      <image class="search-result-sec__result-pic" mode="aspectFit" src="{{item}}" />
+    </view>
+  </scroll-view>
+  <view class="add-pic-sec">
+    <image class="add-pic-btn" mode="aspectFit" src="../../res/image/add-pic-btn.png" catchtap="onTapUploadImage" />
+  </view>
+</view>
+
+
+
+
+<view class="mask" hidden="{{!showMask}}" catchtap="onTapMask">
+
+
+</view>
+<view class="popup-menu" hidden="{{!showPopupMenu}}">
+  <view class="menu-item">
+    <text class="menu-item__text">长按从聊天选取图片</text>
+  </view>
+  <view class="menu-item" catch:tap="onTapQueue">
+    <text class="menu-item__text">上传队列</text>
+  </view>
+  <view class="menu-item" catch:tap="onTapFeedback">
+    <text class="menu-item__text">帮助与反馈</text>
+  </view>
+</view>
