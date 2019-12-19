@@ -7,6 +7,12 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    navbarConfig:{
+      iconType:"fa fa-bars",
+      title:"",
+      statusBarHeight:app.globalData.statusBarHeight,
+      
+    },
     searchResultUrlList:[],
     searchResultLocalPathList: [], //
     searchResultLocalFileList: [], //本地文件地址
@@ -44,7 +50,7 @@ Page({
     }
   },
   //响应点击菜单按钮弹出菜单和遮罩层
-  onTapMenuIcon: function () {
+  onTapTopLeftIcon: function () {
     console.log(11)
     this.setData({
       showMask: true,

@@ -1,11 +1,24 @@
 // pages/upload_queue/upload_queue.js
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    navbarConfig:{
+      iconType:"fa fa-chevron-left",
+      title:"上传队列",
+      statusBarHeight:app.globalData.statusBarHeight
+    },
+  },
 
+  //响应点击返回按钮返回上一页
+  onTapTopLeftIcon: function () {
+    wx.navigateBack({
+      
+    })  
   },
 
   /**

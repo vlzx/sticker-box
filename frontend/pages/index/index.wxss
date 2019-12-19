@@ -7,19 +7,43 @@ page {
 /*导航栏
 --------------------------*/
 .navbar{
-  position: fixed;
-    top: 0px;
-    height: 50rpx;
+
+    height: 32pt;
     width: 100%;
-    background-color: red;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.navbar__menu-btn-sec {
+  display: flex;
+  height: 32pt;
+  width: 32pt;
+  padding-left: 5pt;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3pt;
 }
 
+.navbar__menu-icon {
+  font-size: 18px;
+}
+.navbar__title-sec{
+  display: flex;
+  align-items: center;
+  height: 32pt;
+  width: fit-content;
+  margin-top: 3pt;
+}
+.navbar__title-text{
+  font-weight: bold;
+}
 
 
 /*内容容器模块
 --------------------------*/
+/*容器*/
 .container {
-  height: 100%;
   background-color: #F5F5F5;
   display: flex;
   flex-direction: column;
@@ -27,19 +51,8 @@ page {
   box-sizing: border-box;
 }
 
-.menu-btn-sec {
-  position: fixed;
-  align-self: flex-start;
-  left: 50rpx;
-  top: 70rpx;
 
-}
-
-.menu-icon {
-  font-size: 18px;
-}
-
-/*上半区域（含标题，状态和搜索框）
+/*内容容器-上半区域（含标题，状态和搜索框）
 ----------------------------*/
 .header-sec {
   display: flex;
@@ -94,7 +107,7 @@ page {
 
 }
 
-/* 搜索结果区域 
+/*内容容器-搜索结果区域 
 ----------------------------*/
 .search-result-scrosec {
   flex: 6;

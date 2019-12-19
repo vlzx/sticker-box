@@ -1,8 +1,17 @@
-<!--pages/upload_queue/upload_queue.wxml-->
+<!-- pages/upload_queue/upload_queue.wxml -->
 <view class="container">
+    <view class="navbar " style="padding-top:{{navbarConfig.statusBarHeight}}px">
+        <view class="navbar__menu-btn-sec " catchtap="onTapTopLeftIcon">
+            <i class="{{navbarConfig.iconType}} navbar__menu-icon"></i>
+        </view>
+        <view wx:if="{{navbarConfig.title}}" class="navbar__title-sec">
+            <text class="navbar__title-text">{{navbarConfig.title}}</text>
+        </view>
+        <view class="placeholder-view navbar__menu-btn-sec"></view>
+    </view>
     <view class="item-sec">
         <view class="image-sec">
-            <image class="image-sec__image" mode="aspectFit" src="../../res/image/0.png"/>
+            <image class="image-sec__image" mode="aspectFit" src="../../res/image/0.png" />
         </view>
         <view class="text-sec">
             <text class="text-sec__title">识别结果</text>
@@ -17,5 +26,4 @@
             </view>
         </view>
     </view>
-    
 </view>
