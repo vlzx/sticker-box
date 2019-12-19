@@ -1,0 +1,23 @@
+{
+  "name": "sticker-box",
+  "version": "1.0.0",
+  "description": "Sticker Management Tool based on Wechat Mini Program.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxryo/sticker-box.git"
+  },
+  "author": "",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/zxryo/sticker-box/issues"
+  },
+  "homepage": "https://github.com/zxryo/sticker-box#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "request": "^2.88.0"
+  }
+}
