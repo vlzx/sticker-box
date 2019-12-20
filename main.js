@@ -67,7 +67,8 @@ app.post('/test', function(req, res){
     form.parse(req, function(err, fields, files){
         if(err) throw err
         console.log(fields)
-        res.json(fields)
+        console.log(files)
+        res.json(files)
     })
 })
 
