@@ -1,49 +1,77 @@
-let conf = require('./config')
 let express = require('express')
 let https = require('https')
 let fs = require('fs')
 let request = require('request')
-// let mysql = require('mysql')
+let mysql = require('mysql')
+let formidable = require('formidable')
+// let bodyParser = require('body-parser')
+let conf = require('./config4dev')
+let query = require('./query')
 
 let cert = fs.readFileSync(conf.certPath, 'utf8')
 let key = fs.readFileSync(conf.keyPath, 'utf8')
 
 let app = express()
-// let conn = mysql.createConnection(conf.dbConn)
+let conn = mysql.createConnection(conf.dbConn)
 
-// let router = express.Router()
 // app.use(function (req, res, next) {
 //     res.set('Access-Control-Allow-Origin', '*')
 //     next()
 // })
 
-// function getUUID(sess){
-//     conn.query('SELECT uuid FROM user WHERE openid=?;', sess.openid, function(err, rows){
-//         if(err) throw err
-//         if(!rows.length){
-//             console.log('user not exists')
-            
-//         }
 
-//     })
-// }
+app.use(express.json())
+app.use('/static', express.static(__dirname + '/public'))
+
 
 app.get('/login', function(req, res){
     let js_code = req.query.code
     console.log({js_code: js_code})
     let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${conf.appid}&secret=${conf.secret}&js_code=${js_code}&grant_type=authorization_code`
-    request.get(url, function(err, response, data){
+    request.get(url, async function(err, response, data){
         if(err) throw err
         let sess = JSON.parse(data)
-        console.log(sess)
-        // let uuid = getUUID(sess)
-        res.json({openid: sess.openid})
-        // res.json()
+        // console.log(sess)
+        res.json(await query.getID(conn, sess))
     })
 })
 
 
-// app.use(express.static(__dirname))
+app.get('/search', async function(req, res){
+    let args = req.query
+    let rows = await query.search(conn, args)
+    res.json(JSON.stringify(rows))
+})
+
+
+app.post('/keyword', async function(req, res){
+    let args = req.body
+    let rows = await query.alterKeyword(conn, args)
+    if(rows.changedRows){
+        res.json({code: 0})
+    }
+})
+
+
+app.post('/feedback', async function(req, res){
+    let args = req.body
+    let rows = await query.feedback(conn, args)
+    if(rows.changedRows){
+        res.json({code: 0})
+    }
+})
+
+
+app.post('/test', function(req, res){
+    let form = formidable.IncomingForm()
+    form.parse(req, function(err, fields, files){
+        if(err) throw err
+        console.log(fields)
+        res.json(fields)
+    })
+})
+
+
 
 let server = https.createServer({cert, key}, app)
 
