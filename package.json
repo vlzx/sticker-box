@@ -18,6 +18,7 @@
   "homepage": "https://github.com/zxryo/sticker-box#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "miniprogram-api-promise": "^1.0.4",
     "request": "^2.88.0"
   }
 }

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var wxp=require('../../utils/util.js').wxp
 
 Page({
   data: {
@@ -79,24 +80,44 @@ Page({
   },
   //upload image when touching floating action button
   onTapUploadImage: function () {
-    var that = this
-    wx.chooseImage({
-      sizeType: "compressed",
-      success: function (res) {
-        that.setData({
-          uploadImageList: res.tempFilePaths
-        });
-        wx.uploadFile({
-          url: 'https://fakartist.com/upload',
-          filePath: res.tempFilePaths[0],
-          name: 'file',
-          success:function(res){
-            const data=res.data
-            console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
-          }
+    // console.log(wxp)
+    wxp.chooseImage({
+      sizeType: "compressed"
+    }).then((res)=>{
+      for(let tempFilePath of res.tempFilePaths){
+        wxp.uploadFile({
+          url: app.httpsConfig.serverAddress+'/test/upload',
+          filePath: tempFilePath,
+          name: 'file'
+        }).then((res)=>{
+          console.log(res)
         })
       }
     })
+
+    // var that = this
+    // wx.chooseImage({
+    //   sizeType: "compressed",
+    //   success: function (res) {
+    //     that.setData({
+    //       uploadImageList: res.tempFilePaths,
+    //       searchResultList: res.tempFilePaths //TODO 添加图片后直接展示，测试用
+    //     });
+    //     wx.uploadFile({
+    //       url: 'https://fakartist.com/test',
+    //       filePath: that.data.searchResultList[0],
+    //       name: 'file',
+    //       success:function(res){
+    //         const data=res.data
+    //         console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
+    //       },
+    //       fail:function(res){
+    //         console.log(res)
+    //       }
+    //     })
+    //   }
+    // })
+    
   },
   //响应点击图片事件,预览图片
   onTapPreviewImage:function() {
@@ -112,5 +133,4 @@ Page({
       hasUserInfo: true
     })
   },
-
 })

@@ -1,3 +1,15 @@
+import { promisifyAll, promisify } from '../libs/miniprogram-api-promise/src/index.js';
+
+const wxp = (()=>{
+  // promisify all wx's api
+  let tmpwxp={}
+  promisifyAll(wx, tmpwxp)
+  console.log(tmpwxp.getSystemInfoSync())//TODO
+  tmpwxp.getSystemInfo().then(console.log)//TODO 
+  return tmpwxp
+})()
+
+
 const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -15,5 +27,6 @@ const formatNumber = n => {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  wxp:wxp
 }

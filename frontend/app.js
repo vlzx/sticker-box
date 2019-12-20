@@ -1,4 +1,5 @@
 //app.js
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -32,5 +33,8 @@ App({
     uid:null,  //系统返回
     uname:null,
     statusBarHeight:wx.getSystemInfoSync()['statusBarHeight']
+  },
+  httpsConfig:{
+    serverAddress:'https://fakartist.com'
   }
 })

@@ -24,17 +24,17 @@
     </view>
   </view>
   <scroll-view scroll-y="true" enable-flex="true" class="search-result-scrosec">
-    <!-- view class="search-result-sec__result-sec">
-      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
-    </view>
     <view class="search-result-sec__result-sec">
       <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
     </view>
     <view class="search-result-sec__result-sec">
       <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
-    </view -->
+    </view>
+    <view class="search-result-sec__result-sec">
+      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/0.png" />
+    </view >
     <view wx:for="{{searchResultList}}" class="search-result-sec__result-sec" catch:tap="onTapPreviewImage">
-      <image class="search-result-sec__result-pic" mode="aspectFit" src="{{item}}" />
+      <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>
   <view class="add-pic-sec">

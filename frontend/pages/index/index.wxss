@@ -104,26 +104,24 @@ page {
 .search-sec__input {
   height: 70rpx;
   background-color: white;
-
 }
 
 /*内容容器-搜索结果区域 
 ----------------------------*/
 .search-result-scrosec {
-  flex: 6;
+  flex: 6 ;
   width: 100%;
-  background-color: white;
   display: flex;
+  background-color: white;
   justify-content: space-around;
-  align-items: center;
   flex-flow: row wrap;
 }
 
 .search-result-sec__result-sec {
-  flex: 1 330rpx;
-  max-width: 330rpx;
-  height: 330rpx;
-  margin-top: 60rpx;
+  display: flex;
+  height: 300rpx;
+  width: 300rpx;
+  margin-top: 40rpx;
 }
 
 .search-result-sec__result-pic {
