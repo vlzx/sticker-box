@@ -7,6 +7,12 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    navbarConfig:{
+      iconType:"fa fa-bars",
+      title:"",
+      statusBarHeight:app.globalData.statusBarHeight,
+      
+    },
     searchResultUrlList:[],
     searchResultLocalPathList: [], //
     searchResultLocalFileList: [], //本地文件地址
@@ -44,7 +50,7 @@ Page({
     }
   },
   //响应点击菜单按钮弹出菜单和遮罩层
-  onTapMenuIcon: function () {
+  onTapTopLeftIcon: function () {
     console.log(11)
     this.setData({
       showMask: true,
@@ -78,8 +84,17 @@ Page({
       sizeType: "compressed",
       success: function (res) {
         that.setData({
-          searchResultList: res.tempFilePaths
+          uploadImageList: res.tempFilePaths
         });
+        wx.uploadFile({
+          url: 'https://fakartist.com/upload',
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          success:function(res){
+            const data=res.data
+            console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
+          }
+        })
       }
     })
   },
