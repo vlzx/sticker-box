@@ -84,8 +84,17 @@ Page({
       sizeType: "compressed",
       success: function (res) {
         that.setData({
-          searchResultList: res.tempFilePaths
+          uploadImageList: res.tempFilePaths
         });
+        wx.uploadFile({
+          url: 'https://fakartist.com/upload',
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          success:function(res){
+            const data=res.data
+            console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
+          }
+        })
       }
     })
   },
