@@ -1,4 +1,42 @@
 /* pages/upload_queue/upload_queue.wxss */
+
+/*导航栏
+--------------------------*/
+.navbar{
+
+    height: 32pt;
+    width: 100%;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.navbar__menu-btn-sec {
+  display: flex;
+  height: 32pt;
+  width: 32pt;
+  padding-left: 5pt;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3pt;
+}
+
+.navbar__menu-icon {
+  font-size: 18px;
+}
+.navbar__title-sec{
+  display: flex;
+  align-items: center;
+  height: 32pt;
+  width: fit-content;
+  margin-top: 3pt;
+}
+.navbar__title-text{
+  font-weight: bold;
+}
+
+
+
 .item-sec{
     display: flex;
     flex-direction: row;

@@ -30,6 +30,7 @@ App({
   globalData: {
     userInfo: null,
     uid:null,  //系统返回
-    uname:null
+    uname:null,
+    statusBarHeight:wx.getSystemInfoSync()['statusBarHeight']
   }
 })

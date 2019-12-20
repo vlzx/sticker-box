@@ -15,6 +15,7 @@ const login = ()=>{
     wx.login({
         success: res => {
           // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          
         }
       })
 }
@@ -23,7 +24,23 @@ const login = ()=>{
   2. 上传图片成功后，发送查询识别结果的长链接请求（图片识别可信度数值）和（识别文本）
 */
 const uploadImage = (imageFileList) => {
-
+   wx.chooseImage({
+    success (res) {
+      const tempFilePaths = res.tempFilePaths
+      wx.uploadFile({
+        url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+        filePath: tempFilePaths[0],
+        name: 'file',
+        formData: {
+          'user': 'test'
+        },
+        success (res){
+          const data = res.data
+          //do something
+        }
+      })
+    }
+  })
 }/*搜索图片 search 
 发送【查询文本】。返回（图片静态链接列表）
 */
