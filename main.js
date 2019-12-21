@@ -81,7 +81,7 @@ app.post('/upload', function(req, res){
         let pic = `static/${file.name}`
         let id = await query.upload(conn, pic)
         
-        let results = JSON.parse(await ocr.getResult(pic))
+        let results = await ocr.getResult(pic)
         let keyword = ''
         let average = 0
         results['words_result'].forEach(element => {
@@ -100,7 +100,6 @@ app.post('/upload', function(req, res){
         // console.log(fields)
         // console.log(files)
         // res.json([files, {oldPath: oldPath}])
-        res.json({})//临时
     })
 })
 

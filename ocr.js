@@ -31,8 +31,17 @@ module.exports = {
             
             let req = https.request(options, function(res) {
                     res.setEncoding('utf8');
+                    let chunks = []
                     res.on('data', (chunk) => {
-                        resolve(chunk)
+                        chunks.push(chunk)
+                    })
+                    res.on('end', () => {
+                        let data = ''
+                        chunks.forEach(element => {
+                            data += element
+                        });
+                        // let data = Buffer.concat(chunks);
+                        resolve(JSON.parse(data))
                     })
                 })
             
