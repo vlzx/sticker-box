@@ -8,8 +8,8 @@ module.exports = {
                 if(err) throw err
                 if(!rows.length){
                     let id = uuid()
-                    let insertUser = 'INSERT INTO `user` VALUES(?, ?, ?, ?);'
-                    conn.query(insertUser, [id, sess.openid, sess.session_key, 0], function(err, rows){
+                    let insertUser = 'INSERT INTO `user` VALUES(?, ?, ?, ?, ?);'
+                    conn.query(insertUser, [id, sess.openid, sess.session_key, 0, null], function(err, rows){
                         if(err) throw err
                         console.log('insert')
                         resolve({code: 0, user: id})
@@ -49,6 +49,31 @@ module.exports = {
         return new Promise(resolve => {
             let insertFeedback = 'INSERT INTO `feedback`(`email`, `feedback`) VALUES(?, ?)'
             conn.query(insertFeedback, [args.email, args.feedback], function(err, rows){
+                if(err) throw err
+                resolve(rows)
+            })
+        })
+    },
+
+
+    upload: function(conn, args){
+        return new Promise(resolve => {
+            let id = uuid()
+            let uploadFile = 'INSERT INTO `image` VALUES(?, ?)'
+            conn.query(uploadFile, [id, args.url], function(err, rows){
+                if(err) throw err
+                if(rows.changedRows){
+                    resolve(id)
+                }
+            })
+        })
+    },
+
+
+    getResult: function(conn, args){
+        return new Promise(resolve => {
+            let getResult = 'SELECT * FROM `keyword` WHERE `image`=?'
+            conn.query(getResult, [args.image], function(err, rows){
                 if(err) throw err
                 resolve(rows)
             })

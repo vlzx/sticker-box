@@ -1,5 +1,5 @@
 [Unit]
-Description=Sticker Management Tool Back-end
+Description=sticker-box back-end
 After=network.target
 
 [Service]
