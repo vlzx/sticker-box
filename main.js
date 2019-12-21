@@ -20,6 +20,7 @@ let conn = mysql.createConnection(conf.dbConn)
 
 
 app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 app.use('/static', express.static(__dirname + '/public'))
 
 
@@ -45,19 +46,13 @@ app.get('/search', async function(req, res){
 
 app.post('/keyword', async function(req, res){
     let args = req.body
-    let rows = await query.alterKeyword(conn, args)
-    if(rows.changedRows){
-        res.json({code: 0})
-    }
+    res.json(await query.alterKeyword(conn, args))
 })
 
 
 app.post('/feedback', async function(req, res){
     let args = req.body
-    let rows = await query.feedback(conn, args)
-    if(rows.changedRows){
-        res.json({code: 0})
-    }
+    res.json(await query.feedback(conn, args))
 })
 
 
@@ -68,6 +63,7 @@ app.post('/upload', function(req, res){
     form.keepExtensions = true
     form.parse(req, async function(err, fields, files){
         if(err) throw err
+
         let file = files['file']
         // if(file){
         //     let flag = await checkFormat(file.type)
@@ -93,22 +89,12 @@ app.post('/upload', function(req, res){
 })
 
 
-app.get('/result', async function(req, res){
-    let args = req.query
-    let rows = await query.getResult(conn, args)
-    res.json({content: rows[0].content, level: rows[0].level})
-})
-
-
 // TEST AREA
 app.get('/test/login', (req, res) => {
     res.json({code: 0, user: 'aafa8e64-519a-4269-b9fd-ebb965ae9e13'})
 })
 app.post('/test/upload', (req, res) => {
     res.json({code: 0, image: 'a81efa19-144c-466f-8334-a1cc0a4769f8'})
-})
-app.get('/test/result', (req, res) => {
-    res.json({content: '图像识别结果', level: 0.95})
 })
 app.get('/test/search', (req, res) => {
     res.json([{url: '5c13ddb0-2dad-46a6-b138-1f22626f5c85'}, {url: 'f60de190-eb90-4e1d-87ea-4419d5c91adb'}, {url: 'e8fcc5d3-7dde-431a-825c-7a76ba6ccd96'}])
@@ -119,7 +105,6 @@ app.post('/test/keyword', (req, res) => {
 app.post('/test/feedback', (req, res) => {
     res.json({code: 0})
 })
-// TEST AREA
 
 
 let server = https.createServer({cert, key}, app)

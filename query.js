@@ -25,8 +25,8 @@ module.exports = {
 
     search: function(conn, args){
         return new Promise(resolve => {
-            let searchKeyword = 'SELECT * FROM `keyword` WHERE `user`=? AND `keyword` LIKE %'+args.keyword+'%;'
-            conn.query(searchKeyword, args.uuid, function(err, rows){
+            let searchKeyword = 'SELECT * FROM `keyword` WHERE `user`=? AND `content` LIKE "%'+args.keyword+'%";'
+            conn.query(searchKeyword, args.user, function(err, rows){
                 if(err) throw err
                 resolve(rows)
             })
@@ -36,10 +36,12 @@ module.exports = {
 
     alterKeyword: function(conn, args){
         return new Promise(resolve => {
-            let alterKeyword = 'UPDATE `keyword` SET `keyword`=? WHERE `user`=? AND `image`=?'
+            let alterKeyword = 'UPDATE `keyword` SET `content`=? WHERE `user`=? AND `image`=?'
             conn.query(alterKeyword, [args.keyword, args.user, args.image], function(err, rows){
                 if(err) throw err
-                resolve(rows)
+                if(rows.affectedRows){
+                    resolve({code: 0})
+                }
         })
         })
     },
@@ -50,7 +52,9 @@ module.exports = {
             let insertFeedback = 'INSERT INTO `feedback`(`email`, `feedback`) VALUES(?, ?)'
             conn.query(insertFeedback, [args.email, args.feedback], function(err, rows){
                 if(err) throw err
-                resolve(rows)
+                if(rows.affectedRows){
+                    resolve({code: 0})
+                }
             })
         })
     },
@@ -62,7 +66,7 @@ module.exports = {
             let uploadFile = 'INSERT INTO `image` VALUES(?, ?)'
             conn.query(uploadFile, [id, args.url], function(err, rows){
                 if(err) throw err
-                if(rows.changedRows){
+                if(rows.affectedRows){
                     resolve(id)
                 }
             })

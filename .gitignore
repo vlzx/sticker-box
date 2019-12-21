@@ -3,5 +3,4 @@ node_modules/
 public/
 
 package-lock.json
-test.js
 config.js
