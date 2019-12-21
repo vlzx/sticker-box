@@ -100,7 +100,6 @@ app.post('/upload', function(req, res){
         // console.log(fields)
         // console.log(files)
         // res.json([files, {oldPath: oldPath}])
-        res.json({})//临时
     })
 })
 
