@@ -34,6 +34,19 @@ module.exports = {
     },
 
 
+    insertKeyword: function(conn, args){
+        return new Promise(resolve => {
+            let alterKeyword = 'INSERT INTO `keyword`(`user`, `image`, `content`, `level`) VALUES(?, ?, ?, ?)'
+            conn.query(alterKeyword, [args.user, args.image, args.content, args.level], function(err, rows){
+                if(err) throw err
+                if(rows.affectedRows){
+                    resolve(0)
+                }
+        })
+        })
+    },
+
+
     alterKeyword: function(conn, args){
         return new Promise(resolve => {
             let alterKeyword = 'UPDATE `keyword` SET `content`=? WHERE `user`=? AND `image`=?'
@@ -60,26 +73,15 @@ module.exports = {
     },
 
 
-    upload: function(conn, args){
+    upload: function(conn, pic){
         return new Promise(resolve => {
             let id = uuid()
             let uploadFile = 'INSERT INTO `image` VALUES(?, ?)'
-            conn.query(uploadFile, [id, args.url], function(err, rows){
+            conn.query(uploadFile, [id, pic], function(err, rows){
                 if(err) throw err
                 if(rows.affectedRows){
                     resolve(id)
                 }
-            })
-        })
-    },
-
-
-    getResult: function(conn, args){
-        return new Promise(resolve => {
-            let getResult = 'SELECT * FROM `keyword` WHERE `image`=?'
-            conn.query(getResult, [args.image], function(err, rows){
-                if(err) throw err
-                resolve(rows)
             })
         })
     },

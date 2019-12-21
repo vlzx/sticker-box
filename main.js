@@ -6,6 +6,7 @@ let mysql = require('mysql')
 let formidable = require('formidable')
 let conf = require('./config')
 let query = require('./query')
+let ocr = require('./ocr')
 
 let cert = fs.readFileSync(conf.certPath, 'utf8')
 let key = fs.readFileSync(conf.keyPath, 'utf8')
@@ -64,6 +65,7 @@ app.post('/upload', function(req, res){
     form.parse(req, async function(err, fields, files){
         if(err) throw err
 
+        let user = fields['user']
         let file = files['file']
         // if(file){
         //     let flag = await checkFormat(file.type)
@@ -76,15 +78,29 @@ app.post('/upload', function(req, res){
         //将自动生成的图片名改为【md5码-当前时间毫秒数.图片格式】
         fs.renameSync(oldPath, file.path)
 
-        let args = {url: `static/${file.name}`}
-        let id = await query.upload(conn, args)
-        if(id){
-            res.json({code: 0, image: id})
+        let pic = `static/${file.name}`
+        let id = await query.upload(conn, pic)
+        
+        let results = JSON.parse(await ocr.getResult(pic))
+        let keyword = ''
+        let average = 0
+        results['words_result'].forEach(element => {
+            keyword += element['words']
+            keyword += ';'
+            average += element['probability']['average']
+        })
+        average /= results['words_result_num']
+
+        args = {user: user, image: id, content: keyword, level: average}
+        let v = await query.insertKeyword(conn, args)
+        if(v===0){
+            res.json({user: user, image: id, content: keyword, level: average, code: 0})
         }
 
         // console.log(fields)
         // console.log(files)
         // res.json([files, {oldPath: oldPath}])
+        res.json({})//临时
     })
 })
 

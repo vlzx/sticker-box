@@ -20,7 +20,7 @@ CREATE TABLE `keyword` (
 `image` varchar(128) NOT NULL,
 `content` varchar(256) NOT NULL,
 `level` double NOT NULL,
-`time` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+`time` timestamp ON UPDATE CURRENT_TIMESTAMP,
 PRIMARY KEY (`user`, `image`) 
 );
 CREATE TABLE `feedback` (
