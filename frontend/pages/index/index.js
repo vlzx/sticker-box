@@ -16,8 +16,9 @@ Page({
     showMask: false, //控制隐藏显示遮罩层
     showPopupMenu: false, //控制隐藏显示菜单
     lastSearchString: "",//用于展示搜索结果
-    uploadingFilesAmount:0,
-    picAmount:121
+    lastSearchSavedFileList:[],
+    uploadingFilesAmount: 0,
+    picAmount: 121
   },
   /*事件处理函数
   -----------------------------*/
@@ -27,7 +28,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    }else {
+    } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
@@ -39,21 +40,21 @@ Page({
         }
       })
     }
-    app.uploadingFileManager.addSubscriber("index",(msg, data)=>{
-      let that =this
-      const method={
-        "uncertain":function(data){
-          
+    app.uploadingFileManager.addSubscriber("index", (msg, data) => {
+      let that = this
+      const method = {
+        "uncertain": function (data) {
+
         },
-        "upload":function(data){
+        "upload": function (data) {
           console.log("test")
           that.setData({
-            uploadingFilesAmount:app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
+            uploadingFilesAmount: app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
           })
         },
-        "delete":function(data){
+        "delete": function (data) {
           that.setData({
-            uploadingFilesAmount:app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
+            uploadingFilesAmount: app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
           })
         },
       }
@@ -69,21 +70,29 @@ Page({
     if (!(e.detail.value === this.data.lastSearchString)) { //搜索文本与上次不同时进行查询
       console.log("搜索内容与上次不相同")
       wxp.request({
-        url: app.httpsConfig.serverAddress + "/test/search",
+        url: app.httpsConfig.serverAddress + "/search",
         data: {
-          userId: "test",
+          user: "02150fa0-10d4-4ca6-a130-f35e1148546b",
           keyword: e.detail.value
         }
       }).then(res => { //处理服务器返回的静态链接
+        that.setData({
+          lastSearchSavedFileList:[]
+        })
+        wxp.removeStorage({
+          key:"lastSearchInfo"
+        })
         console.log("测试that:" + (that == this))
-        let data = res.data
-        let resultAmount = res.data.length
+        console.log(res)
+        let resList = res.data
+        console.log(resList)
+        let resultAmount = resList.length
         let completeFlagList = {
           flagList: new Array(resultAmount),
           allComplete: function () {
             for (let flag of this.flagList) {
               if (!flag) {
-                return flase
+                return false
               }
             }
             return true
@@ -91,13 +100,33 @@ Page({
         }
         console.log(res)
         for (let index = 0; index < resultAmount; index++) {
-          let urlObj = res.data[index]
-          wxp.downloadFile({
-            url: urlObj.url,
-          }).then(res => {
-            wxp.saveFile({
-              tempFilePath: res.tempFilePath,
-              complete: function (res) {
+          let url = resList[index]
+          wx.downloadFile({
+            url: app.httpsConfig.serverAddress + "/" + url,
+            success: function (res) {
+              wxp.saveFile({
+                tempFilePath: res.tempFilePath,
+                // complete: function (res) {
+                //   completeFlagList[index] = true
+                //   console.log("complete")
+                //   if (completeFlagList.allComplete()) {
+                //     app.globalData.lastSearchInfo.searchString = e.detail.value
+                //     wxp.setStorage({
+                //       key: "lastSearchInfo",
+                //       data: app.globalData.lastSearchInfo
+                //     })
+                //   }
+                // }
+              }).then(res => {
+                console.log("测试点1：",that.data.lastSearchSavedFileList)
+                that.data.lastSearchSavedFileList.push(res.savedFilePath)
+                that.setData({ //更新图片显示数据
+                  lastSearchSavedFileList: that.data.lastSearchSavedFileList
+                })
+                app.globalData.lastSearchInfo.fileInfo.push({
+                  savedPath: res.savedFilePath
+                })
+              }).finally(res => {
                 completeFlagList[index] = true
                 console.log("complete")
                 if (completeFlagList.allComplete()) {
@@ -107,16 +136,8 @@ Page({
                     data: app.globalData.lastSearchInfo
                   })
                 }
-              }
-            }).then(res => {
-              let newList = this.data.lastSearchSavedPathList.push(res.savedFilePath)
-              this.setData({ //更新图片显示数据
-                lastSearchSavedPathList: newList 
               })
-              app.globalData.lastSearchInfo.fileInfo.push({
-                savedPath: res.savedFilePath
-              })
-            })
+            }
           })
         }
       })
@@ -157,8 +178,8 @@ Page({
   onTapUploadImage: function () {
     // console.log(wxp)
     wxp.chooseImage({
-        sizeType: "compressed"
-      })
+      sizeType: "compressed"
+    })
       .then((res) => {
         // app.globalData.uploadingFilePaths=res.tempFilePaths
         // wx.navigateTo({
@@ -203,9 +224,10 @@ Page({
 
   },
   //响应点击图片事件,预览图片
-  onTapPreviewImage: function () {
+  onTapPreviewImage: function (e) {
     wx.previewImage({
-      urls: searchResultLocalPathList,
+      urls: this.data.lastSearchSavedFileList,
+      current:e.currentTarget.dataset.imageId
     })
   },
   getUserInfo: function (e) {

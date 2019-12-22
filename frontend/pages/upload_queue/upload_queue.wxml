@@ -39,4 +39,4 @@
         </view>
     </form>
 </view -->
-<inputBox title='修改文本并上传' multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm' wx:if='{{showMultilineInputbox}}'></inputBox>
+<inputBox title='修改文本并上传' value='测试' multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm' wx:if='{{showMultilineInputbox}}'></inputBox>

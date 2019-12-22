@@ -15,6 +15,10 @@ Component({
     maxlength: {
       type: Number,
       value: 10
+    },
+    value:{
+      type: String,
+      value:''
     }
   },
 
@@ -25,7 +29,9 @@ Component({
     shadowAnimation: 'shadowDisplay',
     modalAnimation: 'modalDisplay',
     shadowOpacity: '0.65',
-    modalOpacity: '1'
+    modalOpacity: '1',
+    showModal:true,
+    initValue:''
   },
 
   attached: function () {
@@ -49,8 +55,9 @@ Component({
       this.setData({
         shadowAnimation: 'shadowHide',
         modalAnimation: 'modalHide',
-        shadowOpacity: '0',
-        modalOpacity: '0'
+        showModal:false
+        // shadowOpacity: '0',
+        // modalOpacity: '0'
       })
     },
 

@@ -17,7 +17,7 @@ Page({
       tempFilePath:"../../res/image/微信图片_20181025190245.jpg",
       text:"这段文字用于描述图片内容,但是可能存在不准确,需要手动更新"
     }],
-    showMultilineInputbox:false
+    showMultilineInputbox:true
     /*
       {
         imageId:"",
