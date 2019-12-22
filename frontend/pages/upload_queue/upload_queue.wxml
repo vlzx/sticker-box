@@ -1,7 +1,7 @@
 <!-- pages/upload_queue/upload_queue.wxml -->
 <view class="container">
     <view class="navbar " style="padding-top:{{navbarConfig.statusBarHeight}}px">
-        <view class="navbar__menu-btn-sec " catchtap="onTapTopLeftIcon">
+        <view class="navbar__menu-btn-sec " bindtap="onTapTopLeftIcon">
             <i class="{{navbarConfig.iconType}} navbar__menu-icon"></i>
         </view>
         <view wx:if="{{navbarConfig.title}}" class="navbar__title-sec">
@@ -9,21 +9,34 @@
         </view>
         <view class="placeholder-view navbar__menu-btn-sec"></view>
     </view>
-    <view class="item-sec">
+    <view wx:for="{{uncertainFiles}}" class="item-sec" catch:tap="updateText">
         <view class="image-sec">
-            <image class="image-sec__image" mode="aspectFit" src="../../res/image/0.png" />
+            <image class="image-sec__image" mode="aspectFit" src="{{item.tempFilePath}}" />
         </view>
         <view class="text-sec">
             <text class="text-sec__title">识别结果</text>
             <view class="text-sec__result-sec">
-                <text class="text-sec__result-text">测试</text>
+                <text class="text-sec__result-text">{{item.text}}</text>
                 <i class="text-sec__result-update-btn fa fa-pencil"></i>
             </view>
-            <view class="text-sec__line"></view>
+            <!-- view class="text-sec__line"></view>
             <view class="text-sec__states-sec">
                 <i class="text-sec__states-icon fa fa-spinner fa-spin"></i>
                 <text class="text-sec__states-text">上传中</text>
-            </view>
+            </view -->
         </view>
     </view>
 </view>
+<!-- view class="wxapp-prompt" style="{{wxapp_prompt_style}}">
+    <form bindsubmit="onPromptSubmit">
+        <view class="prompt-tip">请填写拒绝的原因？</view>
+        <view class="prompt-input">
+            <input type="text" placeholder="" />
+        </view>
+        <view class="prompt-btns">
+            <button size="mini" formType="submit" type="default">确定</button>
+            <button size="mini" type="default">取消</button>
+        </view>
+    </form>
+</view -->
+<inputBox title='修改文本并上传' multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm' wx:if='{{showMultilineInputbox}}'></inputBox>
