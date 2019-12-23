@@ -117,6 +117,11 @@ app.post('/upload', function(req, res){
     })
 })
 
+// 特 色 铁 拳 👊 规 避
+app.get('/index', function(req, res){
+    res.sendFile(__dirname + '/public/index.html')
+})
+
 
 
 
