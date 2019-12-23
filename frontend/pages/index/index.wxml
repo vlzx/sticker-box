@@ -33,7 +33,7 @@
     <view class="search-result-sec__result-sec">
       <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/微信图片_20181025190245.jpg" />
     </view > -->
-    <view wx:for="{{lastSearchSavedFileList}}" class="search-result-sec__result-sec" data-image-id="{{index}}" catch:tap="onTapPreviewImage">
+    <view wx:for="{{lastSearchSavedFileList}}" class="search-result-sec__result-sec"  data-image-id="{{index}}" catch:tap="onTapPreviewImage">
       <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>

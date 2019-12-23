@@ -13,11 +13,20 @@ Page({
       statusBarHeight: app.globalData.statusBarHeight,
     },
     uncertainFiles: [{
-      imageId:11,
-      tempFilePath:"../../res/image/微信图片_20181025190245.jpg",
-      text:"这段文字用于描述图片内容,但是可能存在不准确,需要手动更新"
-    }],
-    showMultilineInputbox:true
+      imageId: "064a84e8-5bab-40c2-bf27-674ac1b3a516",//TODO测试用id
+      tempFilePath: "../../res/image/微信图片_20181025190245.jpg",
+      text: "这段文字用于描述图片内容,但是可能存在不准确,需要手动更新"
+    }, {
+      imageId: "064a84e8-5bab-40c2-bf27-674ac1b3a516",//TODO测试用id
+      tempFilePath: "../../res/image/微信图片_20181025190245.jpg",
+      text: "这段文字用于描述图片内容,但是可能存在不准确,需要手动更新"
+    },
+    ],
+    showInputbox: false,
+    inputBoxValue: {},
+    initText: "",
+    initImageId: "",
+    currentModalIndex:-1
     /*
       {
         imageId:"",
@@ -37,16 +46,62 @@ Page({
     })
   },
   //
-  onTapItem:function(e){
+  onTapShowInputbox: function (e) {
     //TODO
-    console.log(e)
+    let that = this
+    let index = e.currentTarget.dataset.index
+    console.log(e.currentTarget.dataset.index)
+    this.setData({
+      // inputboxValue:{
+      //   text:that.data.uncertainFiles[index].text,
+      //   imageId:that.data.uncertainFiles[index].imageId
+      // },
+      initText: that.data.uncertainFiles[index].text,
+      initImageId: that.data.uncertainFiles[index].imageId,
+      currentModalIndex:index
+    })
+    console.log("uq测试点6：",that.data.uncertainFiles[index].text)
+    console.log("uq测试点7：",that.data.uncertainFiles[index].imageId)
+    this.setData({
+      showInputbox: true
+    })
+  },
+  onInputConfirm: function (e) {
+    let that=this
+    console.log("uq:测试点1:", e.detail)
+    this.setData({
+      showInputbox: false
+    })
+    var reqTask = wx.request({
+      url: app.httpsConfig.serverAddress+"/keyword",
+      data: {
+        user: app.globalData.uid,
+        image: e.detail.imageId,
+        keyword: e.detail.text
+      },
+      method: 'POST',
+      success: (result) => {
+        console.log("uq测试点3：", result)
+        if(that.data.currentModalIndex!=-1){
+          that.data.uncertainFiles.splice(that.data.currentModalIndex,1)
+          that.setData({
+            uncertainFiles:that.data.uncertainFiles
+          })
+        }
+      },
+      fail: () => { },
+      complete: () => { }
+    });
   },
   //
-  onPromptSubmit:function(e){
+  onInputCancel: function (e) {
+    console.log("uq:测试点2:", e.detail)
+    this.setData({
+      showInputbox: false
+    })
     //TODO
-    console.log(e)
   },
-  test:function(){
+  test: function () {
     console.log(e)
   },
 
@@ -75,23 +130,23 @@ Page({
             text: data.text
           })
           that.setData({
-            uncertainFiles:tempUncertainFiles
+            uncertainFiles: tempUncertainFiles
           })
         },
         "deleteuncertain": function (data) {
           let tempUncertainFiles = that.data.uncertainFiles
-          for(let index=0;index<tempUncertainFiles.length;index++){
-            if(data.tempFilePath==tempUncertainFiles[index].tempFilePath){
-              tempUncertainFiles.splice(index,1)
+          for (let index = 0; index < tempUncertainFiles.length; index++) {
+            if (data.tempFilePath == tempUncertainFiles[index].tempFilePath) {
+              tempUncertainFiles.splice(index, 1)
             }
           }
           that.setData({
-            uncertainFiles:tempUncertainFiles
+            uncertainFiles: tempUncertainFiles
           })
         },
         "uncertainempty": function (data) {
           that.setData({
-            uncertainFiles:[]
+            uncertainFiles: []
           })
         }
       }

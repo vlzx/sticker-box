@@ -61,6 +61,12 @@
 					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "反馈页",
+					"pathName": "pages/feedback/feedback",
+					"scene": null
 				}
 			]
 		}

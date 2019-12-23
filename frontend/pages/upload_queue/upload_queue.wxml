@@ -9,7 +9,7 @@
         </view>
         <view class="placeholder-view navbar__menu-btn-sec"></view>
     </view>
-    <view wx:for="{{uncertainFiles}}" class="item-sec" catch:tap="updateText">
+    <view wx:for="{{uncertainFiles}}" data-index="{{index}}" class="item-sec" catch:tap="onTapShowInputbox">
         <view class="image-sec">
             <image class="image-sec__image" mode="aspectFit" src="{{item.tempFilePath}}" />
         </view>
@@ -39,4 +39,4 @@
         </view>
     </form>
 </view -->
-<inputBox title='修改文本并上传' value='测试' multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm' wx:if='{{showMultilineInputbox}}'></inputBox>
+<inputBox title='修改文本并上传'wx:if='{{showInputbox}}' initText="{{initText}}" initImageId="{{initImageId}}" multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm'></inputBox>
