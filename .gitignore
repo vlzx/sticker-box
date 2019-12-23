@@ -1,5 +1,7 @@
-#ignore folder: node_modules
+#ignore folder: node_modules, public
 node_modules/
+public/
 
 package-lock.json
-config-dev.js
+config.js
+test.js
