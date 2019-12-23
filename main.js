@@ -121,7 +121,9 @@ app.post('/upload', function(req, res){
 app.get('/index', function(req, res){
     res.sendFile(__dirname + '/public/index.html')
 })
-
+app.get('/', function(req, res){
+    res.redirect('/index')
+})
 
 
 
