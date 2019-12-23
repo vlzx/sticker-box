@@ -31,6 +31,7 @@ module.exports = {
             
             let req = https.request(options, function(res) {
                     res.setEncoding('utf8');
+                    // 拼接响应流
                     let chunks = []
                     res.on('data', (chunk) => {
                         chunks.push(chunk)
@@ -45,7 +46,7 @@ module.exports = {
                     })
                 })
             
-            // 携带数据发送https请求
+            // 携带参数发送https请求
             req.write(postData);
             req.end();
         })

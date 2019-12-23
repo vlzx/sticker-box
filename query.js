@@ -87,13 +87,23 @@ module.exports = {
     },
 
 
-    foo: (conn, args)=>{
+    getURL: function(conn, id){
         return new Promise(resolve => {
-            console.log(args)
-            conn.query('UPDATE `test` SET `val`=? WHERE `key`=?;', [args.val, args.key], function(err, rows){
+            conn.query('SELECT `url` FROM `image` WHERE `uuid`=?;', id, function(err, rows){
                 if(err) throw err
                 resolve(rows)
             })
         })
     }
+
+
+    // foo: (conn, args)=>{
+    //     return new Promise(resolve => {
+    //         console.log(args)
+    //         conn.query('UPDATE `test` SET `val`=? WHERE `key`=?;', [args.val, args.key], function(err, rows){
+    //             if(err) throw err
+    //             resolve(rows)
+    //         })
+    //     })
+    // }
 }
