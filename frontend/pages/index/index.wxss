@@ -110,7 +110,8 @@ page {
   border-radius: 4px;
   color: rgba(16, 16, 16, 1);
   box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
-  border: 1px solid rgba(255, 0, 0, 0);
+  border: 1px solid rgba(75, 63, 63, 0);
+  padding-left: 10px;
 }
 
 /*内容容器-搜索结果区域 
