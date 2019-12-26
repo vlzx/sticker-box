@@ -36,6 +36,7 @@
 
 .navbar__title-text {
     font-weight: bold;
+    font-size: 17px;
 }
 
 
@@ -51,6 +52,19 @@
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0);
     box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 0.5);
+}
+.item-sec:active{
+    display: flex;
+    flex-direction: row;
+    width: 710rpx;
+    height: 240rpx;
+    background-color: #F6F6F6;
+    margin-top: 24rpx;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0);
+    box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 0.5);
+    opacity: 0.9;
 }
 
 /*图片区块*/

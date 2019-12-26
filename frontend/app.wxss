@@ -1,6 +1,7 @@
 /**app.wxss**/
 @import "res/font/font.wxss";
 @import "res/icon/font-awesome.wxss";
+@import "libs/animate.wxss";
 page {
   height: 100%;
 }

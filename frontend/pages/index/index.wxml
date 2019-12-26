@@ -15,7 +15,7 @@
     </view>
     <view class="state-sec">
       <!-- image class="state-sec__icon" / -->
-      <i class="fa fa-hashtag"></i>
+      <i class="state-sec__icon fa fa-cloud"></i>
       <text class="state-sec__text">{{uploadingFilesAmount==0?"已保存图片 "+picAmount:"正在上传图片数量 "+uploadingFilesAmount}}</text>
     </view>
     <view class="search-sec">
@@ -33,7 +33,7 @@
     <view class="search-result-sec__result-sec">
       <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/微信图片_20181025190245.jpg" />
     </view > -->
-    <view wx:for="{{lastSearchSavedFileList}}" class="search-result-sec__result-sec"  data-image-id="{{index}}" catch:tap="onTapPreviewImage">
+    <view wx:for="{{lastSearchSavedFileList}}" class="search-result-sec__result-sec animated fadeInUp fast"  data-image-id="{{index}}" catch:tap="onTapPreviewImage">
       <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>
@@ -42,14 +42,17 @@
   </view>
 </view>
 <view class="mask" hidden="{{!showMask}}" catchtap="onTapMask"></view>
-<view class="popup-menu" hidden="{{!showPopupMenu}}">
+<view class="popup-menu animated fadeIn" hidden="{{!showPopupMenu}}">
   <view class="menu-item">
     <text class="menu-item__text">长按从聊天选取图片</text>
+    <switch class="menu-item__switch" bindchange="" />
   </view>
   <view class="menu-item" catch:tap="onTapQueue">
     <text class="menu-item__text">手动更新</text>
+    <i class="menu-item__icon fa fa-angle-right"></i>
   </view>
   <view class="menu-item" catch:tap="onTapFeedback">
     <text class="menu-item__text">帮助与反馈</text>
+    <i class="menu-item__icon fa fa-angle-right"></i>
   </view>
 </view>

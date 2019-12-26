@@ -33,6 +33,7 @@ margin-top: 3pt;
 }
 .navbar__title-text{
 font-weight: bold;
+font-size: 17px;
 }
 
 .feedback{
