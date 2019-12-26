@@ -167,7 +167,7 @@ page {
   width: 120rpx;
   border-radius: 999px;
   box-shadow: 4px 4px 8px 0px rgba(186, 201, 210, 1);
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.1s;
 }
 .add-pic-sec:active{
   position: fixed;

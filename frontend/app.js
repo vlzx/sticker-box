@@ -2,11 +2,19 @@
 const wxp = require('utils/util.js').wxp
 App({
   onLaunch: function () {
+    let that =this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    //加载全局参数 
+    wxp.getStorage({
+      key:"userId"
+    })
+    .then(res=>{
+      console.log("app point 1",res.data)
+      that.globalData.userId=res.data
+    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -16,7 +24,6 @@ App({
             success: res => {  
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -27,6 +34,7 @@ App({
         }
       }
     })
+
   },
   uploadingFileManager: {
     uploadingFiles: {
@@ -102,7 +110,7 @@ App({
             filePath: tempFilePaths[index],
             name: "file",
             formData: {
-              "user": getApp().globalData.uid
+              "user": getApp().globalData.userId
             }
           })
           .then((res) => {
@@ -190,7 +198,7 @@ App({
   globalData: {
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
     userInfo: null,
-    uid: "02150fa0-10d4-4ca6-a130-f35e1148546b", //TODO 测试用
+    userId: "", //TODO 测试用 02150fa0-10d4-4ca6-a130-f35e1148546b
     uname: null,
     lastSearchInfo: {
       searchString: "",

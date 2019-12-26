@@ -176,6 +176,29 @@ Page({
   },
   //相应点击上传图片按钮，上传图片
   onTapUploadImage: function () {
+    if(!app.globalData.userId){
+      wxp.login()
+      .then(res=>{
+        return wxp.request({
+          url:app.httpsConfig.serverAddress+"/login",
+          data:{
+            code:res.code
+          }
+        })
+      })
+      .then(res=>{
+        console.log(res)
+        app.globalData.userId=res.data.user
+        wx.setStorage({
+          key:"userId",
+          data:res.data.user,
+          success:function(){
+            //TODO 测试用，优化时删除
+            console.log("index point 1",res.data.user)
+          }
+        })
+      })
+    }else{
     // console.log(wxp)
     wxp.chooseImage({
       sizeType: "compressed"
@@ -198,6 +221,8 @@ Page({
         //     })
         // }
       })
+    }
+
 
     // var that = this
     // wx.chooseImage({

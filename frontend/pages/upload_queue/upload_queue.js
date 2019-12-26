@@ -75,7 +75,7 @@ Page({
     var reqTask = wx.request({
       url: app.httpsConfig.serverAddress+"/keyword",
       data: {
-        user: app.globalData.uid,
+        user: app.globalData.userId,
         image: e.detail.imageId,
         keyword: e.detail.text
       },
