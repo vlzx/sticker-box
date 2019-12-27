@@ -150,6 +150,9 @@ Page({
           })
         }
       }
+      if(method[msg]){
+        method[msg](data)
+      }
     })
   },
 

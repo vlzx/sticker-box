@@ -87,7 +87,7 @@ App({
     addToQueue: function (tempFilePaths) {
 
       var that = this
-      console.log(that)
+      console.log("app test point 1",that)
       // let existFileAmount = this.uploadingFiles.length
       // uploadingFiles.push(...(tempFilePaths.map((current, i) => {
       //   return {
@@ -124,12 +124,12 @@ App({
                 imageId: res.data.image,
                 text: res.data.text
               }
+              this.removeFromQueue(tempFilePaths[index])
               this.notify("uncertain",{
                 tempFilePath:tempFilePaths[index],
                 imageId:res.data.image,
                 text:res.data.text
               })
-              this.removeFromQueue(tempFilePaths[index])
             }
             if (this.getObjectNotNullLength(this.uploadingFiles) === 0) {
               this.notify("queueempty",{})
@@ -149,6 +149,8 @@ App({
             // this.notify(completeString, {
             //   tempFilePath: tempFilePaths[index]
             // })
+          }).finally(res=>{
+            console.log("app test point 2")
           })
       }
     },
@@ -194,6 +196,30 @@ App({
       return count
     }
 
+  },
+  login:function(){
+    let that =this
+    wxp.login()
+      .then(res=>{
+        return wxp.request({
+          url:that.httpsConfig.serverAddress+"/login",
+          data:{
+            code:res.code
+          }
+        })
+      })
+      .then(res=>{
+        console.log(res)
+        that.globalData.userId=res.data.user
+        wx.setStorage({
+          key:"userId",
+          data:res.data.user,
+          success:function(){
+            //TODO 测试用，优化时删除
+            console.log("index point 1",res.data.user)
+          }
+        })
+      })
   },
   globalData: {
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],
