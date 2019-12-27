@@ -18,8 +18,8 @@ Page({
   onTapTopLeftIcon: function () {
     console.log("fuck")
     wx.navigateTo({
-      url:"../index/index"
-    })  
+      url: "../index/index"
+    })
   },
 
   /**

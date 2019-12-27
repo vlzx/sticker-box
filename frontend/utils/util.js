@@ -1,11 +1,14 @@
-import { promisifyAll, promisify } from '../libs/miniprogram-api-promise/src/index.js';
+import {
+  promisifyAll,
+  promisify
+} from '../libs/miniprogram-api-promise/src/index.js';
 
-const wxp = (()=>{
+const wxp = (() => {
   // promisify all wx's api
-  let tmpwxp={}
+  let tmpwxp = {}
   promisifyAll(wx, tmpwxp)
-  console.log(tmpwxp.getSystemInfoSync())//TODO
-  tmpwxp.getSystemInfo().then(console.log)//TODO 
+  console.log(tmpwxp.getSystemInfoSync()) //TODO
+  tmpwxp.getSystemInfo().then(console.log) //TODO 
   return tmpwxp
 })()
 
@@ -54,6 +57,6 @@ function getDateString(time) {
 
 module.exports = {
   formatTime: formatTime,
-  wxp:wxp,
+  wxp: wxp,
   getDateString: getDateString
 }

@@ -2,9 +2,11 @@
 /* @import "res/font/font.wxss"; */
 @import "res/icon/font-awesome.wxss";
 @import "libs/animate.wxss";
+
 page {
   height: 100%;
 }
+
 .container {
   height: 100%;
   background-color: #F5F5F5;
@@ -14,4 +16,4 @@ page {
   box-sizing: border-box;
   font-family: 'syht-normal';
   font-size: 12px;
-} 
+}

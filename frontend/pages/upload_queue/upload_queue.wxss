@@ -53,7 +53,8 @@
     border: 1px solid rgba(255, 255, 255, 0);
     box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 0.5);
 }
-.item-sec-hover{
+
+.item-sec-hover {
     display: flex;
     flex-direction: row;
     width: 710rpx;
@@ -120,4 +121,3 @@
     font-size: 20px;
     color: gray;
 }
-

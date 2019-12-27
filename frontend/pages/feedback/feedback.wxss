@@ -2,7 +2,7 @@
 
 /*导航栏
 --------------------------*/
-.navbar{
+.navbar {
 
   height: 32pt;
   width: 100%;
@@ -11,32 +11,35 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
 .navbar__menu-btn-sec {
-display: flex;
-height: 32pt;
-width: 32pt;
-padding-left: 5pt;
-align-items: center;
-justify-content: center;
-margin-top: 3pt;
+  display: flex;
+  height: 32pt;
+  width: 32pt;
+  padding-left: 5pt;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3pt;
 }
 
 .navbar__menu-icon {
-font-size: 18px;
-}
-.navbar__title-sec{
-display: flex;
-align-items: center;
-height: 32pt;
-width: fit-content;
-margin-top: 3pt;
-}
-.navbar__title-text{
-font-weight: bold;
-font-size: 17px;
+  font-size: 18px;
 }
 
-.feedback{
+.navbar__title-sec {
+  display: flex;
+  align-items: center;
+  height: 32pt;
+  width: fit-content;
+  margin-top: 3pt;
+}
+
+.navbar__title-text {
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.feedback {
   box-sizing: border-box;
   padding: 10px;
   position: relative;
@@ -46,6 +49,7 @@ font-size: 17px;
   background-color: #FFFFFF;
   border-radius: 10px;
 }
+
 /* .email{
   box-sizing: border-box;
   padding-left: 10px;
@@ -67,29 +71,32 @@ font-size: 17px;
   font-family: Arial;
   text-align: center;
 } */
-.email-input{
+.email-input {
   box-sizing: border-box;
   height: 90rpx;
   width: 90%;
-  padding:10rpx 20rpx 10rpx 20rpx;
+  padding: 10rpx 20rpx 10rpx 20rpx;
   background-color: #FFFFFF;
   position: relative;
   top: 6%;
   border-radius: 10px;
 }
-.feedback-placeholder{
+
+.feedback-placeholder {
   color: rgba(170, 170, 170, 1);
   font-size: 30rpx;
   font-family: Arial;
   margin-top: 20rpx;
 }
-.email-placeholder{
+
+.email-placeholder {
   color: rgba(170, 170, 170, 1);
   font-size: 30rpx;
   font-family: Arial;
 }
-button{
+
+button {
   position: relative;
   width: 80%;
-  top:10%;
+  top: 10%;
 }

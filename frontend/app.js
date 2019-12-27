@@ -2,26 +2,26 @@
 const wxp = require('utils/util.js').wxp
 App({
   onLaunch: function () {
-    let that =this
+    let that = this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     //加载全局参数 
     wxp.getStorage({
-      key:"userId"
-    })
-    .then(res=>{
-      console.log("app point 1",res.data)
-      that.globalData.userId=res.data
-    })
+        key: "userId"
+      })
+      .then(res => {
+        console.log("app point 1", res.data)
+        that.globalData.userId = res.data
+      })
     wxp.getStorage({
-      key:"rejectAuthorization"
-    })
-    .then(res=>{
-      console.log("app point 7",res.data)
-      that.globalData.rejectAuthorization=res.data
-    })
+        key: "rejectAuthorization"
+      })
+      .then(res => {
+        console.log("app point 7", res.data)
+        that.globalData.rejectAuthorization = res.data
+      })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -96,7 +96,7 @@ App({
     addToQueue: function (tempFilePaths) {
 
       var that = this
-      console.log("app test point 1",that)
+      console.log("app test point 1", that)
       // let existFileAmount = this.uploadingFiles.length
       // uploadingFiles.push(...(tempFilePaths.map((current, i) => {
       //   return {
@@ -123,37 +123,40 @@ App({
             }
           })
           .then(resJson => {
-            let res=JSON.parse(resJson.data)
-            if ((res=>{
+            let res = JSON.parse(resJson.data)
+            if ((res => {
                 //TODO判断是否需要手动输入，不需要返回true，需要返回false 
-                console.log("app test point 3",res)
-                if(res.level>0.96){return true}
-                else {return false}
+                console.log("app test point 3", res)
+                if (res.level > 0.96) {
+                  return true
+                } else {
+                  return false
+                }
               })(res)) {
               this.removeFromQueue(tempFilePaths[index])
-              let tmpSavedImageAmount=wx.getStorageSync("savedImageAmount")
-              console.log("app test point 9",wx.getStorageSync("savedImageAmount"))
+              let tmpSavedImageAmount = wx.getStorageSync("savedImageAmount")
+              console.log("app test point 9", wx.getStorageSync("savedImageAmount"))
               wxp.setStorage({
-                key:"savedImageAmount",
-                data:tmpSavedImageAmount+1
+                key: "savedImageAmount",
+                data: tmpSavedImageAmount + 1
               })
-              this.notify("success",{})
+              this.notify("success", {})
             } else {
-              console.log("app test point 10",res)
+              console.log("app test point 10", res)
               that.uncertainFiles[tempFilePaths[index]] = {
                 imageId: res.image,
                 text: res.content
               }
-              console.log("app test point 8",that.uncertainFiles[tempFilePaths[index]])
+              console.log("app test point 8", that.uncertainFiles[tempFilePaths[index]])
               this.removeFromQueue(tempFilePaths[index])
-              this.notify("uncertain",{
-                tempFilePath:tempFilePaths[index],
-                imageId:res.image,
-                text:res.text
+              this.notify("uncertain", {
+                tempFilePath: tempFilePaths[index],
+                imageId: res.image,
+                text: res.text
               })
             }
             if (this.getObjectNotNullLength(this.uploadingFiles) === 0) {
-              this.notify("queueempty",{})
+              this.notify("queueempty", {})
               this.clearQueue()
             }
             // let completeString = res.data.level > 0.9 ? "success" : "uncertain"
@@ -170,7 +173,7 @@ App({
             // this.notify(completeString, {
             //   tempFilePath: tempFilePaths[index]
             // })
-          }).finally(res=>{
+          }).finally(res => {
             console.log("app test point 2")
           })
       }
@@ -187,23 +190,23 @@ App({
         tempFilePath: tempFilePath
       })
     },
-    removeFromUncertain:function(tempFilePath){
-      this.uncertainFiles[tempFilePath]=null
-      this.notify("deleteuncertain",{
+    removeFromUncertain: function (tempFilePath) {
+      this.uncertainFiles[tempFilePath] = null
+      this.notify("deleteuncertain", {
         tempFilePath: tempFilePath
       })
       if (this.getObjectNotNullLength(this.uncertainFiles) === 0) {
-        this.notify("uncertainempty",{})  
+        this.notify("uncertainempty", {})
       }
-      
+
     },
     //重置上传队列
     clearQueue: function () {
       this.uploadingFiles = {}
     },
     //重置不确定图片队列
-    clearUncertain:function(){
-      this.uncertainFiles={}
+    clearUncertain: function () {
+      this.uncertainFiles = {}
     },
     getObjectNotNullLength: function (obj) {
       let count = 0
@@ -217,26 +220,26 @@ App({
     }
 
   },
-  login:function(){
-    let that =this
+  login: function () {
+    let that = this
     wxp.login()
-      .then(res=>{
+      .then(res => {
         return wxp.request({
-          url:that.httpsConfig.serverAddress+"/login",
-          data:{
-            code:res.code
+          url: that.httpsConfig.serverAddress + "/login",
+          data: {
+            code: res.code
           }
         })
       })
-      .then(res=>{
+      .then(res => {
         console.log(res)
-        that.globalData.userId=res.data.user
+        that.globalData.userId = res.data.user
         wx.setStorage({
-          key:"userId",
-          data:res.data.user,
-          success:function(){
+          key: "userId",
+          data: res.data.user,
+          success: function () {
             //TODO 测试用，优化时删除
-            console.log("index point 1",res.data.user)
+            console.log("index point 1", res.data.user)
           }
         })
       })
@@ -246,7 +249,8 @@ App({
     userInfo: null,
     userId: "", //TODO 测试用 02150fa0-10d4-4ca6-a130-f35e1148546b
     uname: null,
-    rejectAuthorization:false,
+    rejectAuthorization: false,
+    longPressSetting: true,
     lastSearchInfo: {
       searchString: "",
       fileInfo: [

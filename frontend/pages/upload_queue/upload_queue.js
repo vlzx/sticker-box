@@ -13,14 +13,13 @@ Page({
       title: "上传队列",
       statusBarHeight: app.globalData.statusBarHeight,
     },
-    uncertainFiles: [
-    ],
+    uncertainFiles: [],
     showInputbox: false,
     inputBoxValue: {},
     initText: "",
     initImageId: "",
-    initTempFilePath:"",
-    currentModalIndex:-1
+    initTempFilePath: "",
+    currentModalIndex: -1
     /*
       {
         imageId:"",
@@ -52,24 +51,24 @@ Page({
       // },
       initText: that.data.uncertainFiles[index].text,
       initImageId: that.data.uncertainFiles[index].imageId,
-      initTempFilePath:that.data.uncertainFiles[index].tempFilePath,
-      currentModalIndex:index
+      initTempFilePath: that.data.uncertainFiles[index].tempFilePath,
+      currentModalIndex: index
     })
-    console.log("uq测试点6：",that.data.uncertainFiles[index].text)
-    console.log("uq测试点7：",that.data.uncertainFiles[index].imageId)
-    console.log("uq测试点8：",that.data.uncertainFiles[index].tempFilePath)
+    console.log("uq测试点6：", that.data.uncertainFiles[index].text)
+    console.log("uq测试点7：", that.data.uncertainFiles[index].imageId)
+    console.log("uq测试点8：", that.data.uncertainFiles[index].tempFilePath)
     this.setData({
       showInputbox: true
     })
   },
   onInputConfirm: function (e) {
-    let that=this
+    let that = this
     console.log("uq:测试点1:", e.detail)
     this.setData({
       showInputbox: false
     })
     var reqTask = wx.request({
-      url: app.httpsConfig.serverAddress+"/keyword",
+      url: app.httpsConfig.serverAddress + "/keyword",
       data: {
         user: app.globalData.userId,
         image: e.detail.imageId,
@@ -78,17 +77,17 @@ Page({
       method: 'POST',
       success: (result) => {
         console.log("uq测试点3：", result)
-        if(that.data.currentModalIndex!=-1){
-          that.data.uncertainFiles.splice(that.data.currentModalIndex,1)
+        if (that.data.currentModalIndex != -1) {
+          that.data.uncertainFiles.splice(that.data.currentModalIndex, 1)
           that.setData({
-            uncertainFiles:that.data.uncertainFiles
+            uncertainFiles: that.data.uncertainFiles
           })
         }
         app.uploadingFileManager.removeFromUncertain(e.detail.tempFilePath)
-        let tmpSavedImageAmount=wx.getStorageSync("savedImageAmount")
+        let tmpSavedImageAmount = wx.getStorageSync("savedImageAmount")
         wxp.setStorage({
-          key:"savedImageAmount",
-          data:tmpSavedImageAmount+1
+          key: "savedImageAmount",
+          data: tmpSavedImageAmount + 1
         })
       },
       fail: () => {
@@ -155,7 +154,7 @@ Page({
           //TODO 展示背景图片的判定
         }
       }
-      if(method[msg]){
+      if (method[msg]) {
         method[msg](data)
       }
     })
@@ -172,7 +171,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("eee", this.data.uncertainFiles)
 
+    if (this.data.uncertainFiles.length == 0) {
+      console.log("aaa")
+      wx.showToast({
+        title: "没有表情需要手动更新文本，快去上传表情吧",
+        icon: "none",
+        duration: 2000
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "../index/index"
+        })
+      }, 2000)
+    }
   },
 
   /**

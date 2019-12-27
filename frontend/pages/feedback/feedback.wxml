@@ -9,10 +9,10 @@
     </view>
     <view class="placeholder-view navbar__menu-btn-sec"></view>
   </view>
-  <textarea class='feedback' placeholder-class='feedback-placeholder' placeholder='请写下吐槽或改进意见,我们将不断改进~' focus="{{true}}" ></textarea>
+  <textarea class='feedback' placeholder-class='feedback-placeholder' placeholder='请写下吐槽或改进意见,我们将不断改进~' focus="{{true}}"></textarea>
   <!-- <view class='email'>
     <text class='email-title'>联系邮箱</text> -->
-    <input class='email-input' placeholder-class='email-placeholder' placeholder='请输入邮箱方便联系'></input>
+  <input class='email-input' placeholder-class='email-placeholder' placeholder='请输入邮箱方便联系'></input>
   <!-- </view> -->
   <button type='primary'>提交</button>
 </view>
