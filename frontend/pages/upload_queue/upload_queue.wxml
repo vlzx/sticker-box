@@ -39,4 +39,4 @@
         </view>
     </form>
 </view -->
-<inputBox title='修改文本并上传'wx:if='{{showInputbox}}' initText="{{initText}}" initImageId="{{initImageId}}" multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm'></inputBox>
+<inputBox title='修改文本并上传'wx:if='{{showInputbox}}' initText="{{initText}}" initImageId="{{initImageId}}" tempFilePath="{{initTempFilePath}}" multiline bindinputCancel='onInputCancel' bindinputConfirm='onInputConfirm'></inputBox>

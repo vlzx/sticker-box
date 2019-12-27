@@ -18,7 +18,11 @@ Page({
     lastSearchString: "",//用于展示搜索结果
     lastSearchSavedFileList:[],
     uploadingFilesAmount: 0,
-    picAmount: 121
+    savedImageAmount: 0,
+    greetMsg:{
+      line1:"",
+      line2:""
+    }
   },
   /*事件处理函数
   -----------------------------*/
@@ -64,12 +68,57 @@ Page({
           that.setData({
             uploadingFilesAmount: app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
           })
+          wxp.getStorage({
+            key:"savedImageAmount"
+          }).then(res=>{
+            that.setData({
+              savedImageAmount:res.data
+            })
+          })
         },
       }
       if(method[msg]){
         method[msg](data)
       }
     })
+  },
+  onShow:function(){
+    var that=this
+    //onShow更新（时间，欢迎语，存储图片更新）
+    let greetMsgVar={
+      line1:"",
+      line2:""
+    }
+    let savedImageAmountVar=0
+    wxp.getStorage({
+      key:"savedImageAmount"
+    }).then(res=>{
+      that.setData({
+        savedImageAmount:res.data
+      })
+    })
+    //TODO 文本生成
+    let greetMsgList=["在找表情？搜索一下吧~","上传表情，自动识别文本","轻松上传保存，快速搜索"]
+    let hour=new Date().getHours()
+    console.log("index test point 8",hour)
+    let period=""
+    if(hour < 4)period='夜深了，晚安zzZ🌙'
+    else if(hour < 8)period='Hi,早上好~☀'
+    else if(hour < 12)period='Hi,上午好~☀'
+    else if(hour < 14)period='Hi,中午好~☀'
+    else if(hour < 17)period='🙋 下午好~'
+    else if(hour < 19)period='🙋 傍晚好~'
+    else period='🙋 晚上好~'
+    greetMsgVar.line1=period
+    greetMsgVar.line2=greetMsgList[Math.floor(Math.random()*3)]
+    /*
+    点击按钮上传第一张表情
+    */
+    that.setData({
+      greetMsg:greetMsgVar
+    })
+
+    // if(app.user)
   },
   //搜索
   onConfirmSearch: function (e) {
@@ -188,9 +237,47 @@ Page({
   },
   //相应点击上传图片按钮，上传图片
   onTapUploadImage: function () {
+    //TODO 首次点击上传图片按钮提示获取用户名
+    // if(!(app.globalData.userInfo)){
+    //   console.log("wdnmd")
+    //   wx.authorize({
+    //     scope:"scope.userInfo",
+    //     success:function(){
+    //       wx.getUserInfo({
+    //         success: res => {
+    //           console.log("index test point 7")
+    //           // 可以将 res 发送给后台解码出 unionId
+    //           app.globalData.userInfo = res.userInfo
+    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //           // 所以此处加入 callback 以防止这种情况
+    //           if (this.userInfoReadyCallback) {
+    //             this.userInfoReadyCallback(res)
+    //           }
+    //         }
+    //       })
+    //     },
+    //     fail:function(){
+    //       //如果拒绝授权用户信息，则设置【用户拒绝授权信息标识】
+    //       console.log("cao!")
+    //       app.globalData.rejectAuthorization=true
+    //       wx.setStorageSync({
+    //         key:"rejectAuthorization",
+    //         data:true
+    //       })
+    //     }
+    //   })
+    // }else{
+      
+    // }
     if(!app.globalData.userId){
       app.login()
+      wx.setStorage({
+        key:"savedImageAmount",
+        data:0
+      })
     }else{
+
+    }
     // console.log(wxp)
     wxp.chooseImage({
       sizeType: "compressed"
@@ -213,7 +300,7 @@ Page({
         //     })
         // }
       })
-    }
+
 
 
     // var that = this

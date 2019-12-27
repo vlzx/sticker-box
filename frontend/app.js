@@ -15,13 +15,23 @@ App({
       console.log("app point 1",res.data)
       that.globalData.userId=res.data
     })
+    wxp.getStorage({
+      key:"rejectAuthorization"
+    })
+    .then(res=>{
+      console.log("app point 7",res.data)
+      that.globalData.rejectAuthorization=res.data
+    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log("app test point 4")
         if (res.authSetting['scope.userInfo']) {
+          console.log("app test point 4")
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
-            success: res => {  
+            success: res => {
+              console.log("app test point 5")
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -34,7 +44,6 @@ App({
         }
       }
     })
-
   },
   uploadingFileManager: {
     uploadingFiles: {
@@ -113,22 +122,34 @@ App({
               "user": getApp().globalData.userId
             }
           })
-          .then((res) => {
-            if ((res) => {
-                //TODO判断是否需要手动输入，不需要返回true，需要返回false              
-              }) {
+          .then(resJson => {
+            let res=JSON.parse(resJson.data)
+            if ((res=>{
+                //TODO判断是否需要手动输入，不需要返回true，需要返回false 
+                console.log("app test point 3",res)
+                if(res.level>0.96){return true}
+                else {return false}
+              })(res)) {
               this.removeFromQueue(tempFilePaths[index])
+              let tmpSavedImageAmount=wx.getStorageSync("savedImageAmount")
+              console.log("app test point 9",wx.getStorageSync("savedImageAmount"))
+              wxp.setStorage({
+                key:"savedImageAmount",
+                data:tmpSavedImageAmount+1
+              })
               this.notify("success",{})
             } else {
-              this.uncertainFiles[tempFilePaths[index]] = {
-                imageId: res.data.image,
-                text: res.data.text
+              console.log("app test point 10",res)
+              that.uncertainFiles[tempFilePaths[index]] = {
+                imageId: res.image,
+                text: res.content
               }
+              console.log("app test point 8",that.uncertainFiles[tempFilePaths[index]])
               this.removeFromQueue(tempFilePaths[index])
               this.notify("uncertain",{
                 tempFilePath:tempFilePaths[index],
-                imageId:res.data.image,
-                text:res.data.text
+                imageId:res.image,
+                text:res.text
               })
             }
             if (this.getObjectNotNullLength(this.uploadingFiles) === 0) {
@@ -172,8 +193,7 @@ App({
         tempFilePath: tempFilePath
       })
       if (this.getObjectNotNullLength(this.uncertainFiles) === 0) {
-        this.notify("uncertainempty",{})
-        
+        this.notify("uncertainempty",{})  
       }
       
     },
@@ -226,6 +246,7 @@ App({
     userInfo: null,
     userId: "", //TODO 测试用 02150fa0-10d4-4ca6-a130-f35e1148546b
     uname: null,
+    rejectAuthorization:false,
     lastSearchInfo: {
       searchString: "",
       fileInfo: [

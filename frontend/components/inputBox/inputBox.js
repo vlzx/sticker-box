@@ -23,6 +23,10 @@ Component({
     initImageId:{
       type:String,
       value:''
+    },
+    tempFilePath:{
+      type:String,
+      value:''
     }
   },
 
@@ -86,7 +90,7 @@ Component({
       // this.hideInputBox()
       console.log("inputBpx:测试点1:",that.data.text)
       console.log("ib测试点6:",that.data.imageId)
-      this.triggerEvent('inputConfirm', {text:that.data.text,imageId:that.data.imageId})
+      this.triggerEvent('inputConfirm', {text:that.data.text,imageId:that.data.imageId,tempFilePath:that.properties.tempFilePath})
       // setTimeout(function () {
       //   that.triggerEvent('inputConfirm', that.data.text)
       // }, 100)
