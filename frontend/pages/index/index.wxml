@@ -37,8 +37,8 @@
       <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>
-  <view class="add-pic-sec">
-    <image class="add-pic-btn"  mode="aspectFit" src="../../res/image/add-pic-btn.png" catchtap="onTapUploadImage" />
+  <view class="add-pic-sec" hover-class="add-pic-sec-hover" hover-stay-time="100">
+    <image class="add-pic-btn" mode="aspectFit" src="../../res/image/add-pic-btn.png" catchtap="onTapUploadImage" />
   </view>
 </view>
 <view class="mask" hidden="{{!showMask}}" catchtap="onTapMask"></view>
@@ -47,11 +47,11 @@
     <text class="menu-item__text">长按从聊天选取图片</text>
     <switch class="menu-item__switch" bindchange="" />
   </view>
-  <view class="menu-item" catch:tap="onTapQueue">
+  <view class="menu-item" hover-class="menu-item-hover" hover-stay-time="100" catch:tap="onTapQueue">
     <text class="menu-item__text">手动更新</text>
     <i class="menu-item__icon fa fa-angle-right"></i>
   </view>
-  <view class="menu-item" catch:tap="onTapFeedback">
+  <view class="menu-item" hover-class="menu-item-hover" hover-stay-time="100" catch:tap="onTapFeedback">
     <text class="menu-item__text">帮助与反馈</text>
     <i class="menu-item__icon fa fa-angle-right"></i>
   </view>

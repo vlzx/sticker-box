@@ -10,7 +10,7 @@
         <view class="placeholder-view navbar__menu-btn-sec"></view>
     </view>
     <view wx:for="{{uncertainFiles}}" wx:key="imageId" data-index="{{index}}" class="item-sec animated fadeInUp fast" catch:tap="onTapShowInputbox">
-        <view class="image-sec">
+        <view class="image-sec" hover-class="item-sec-hover">
             <image class="image-sec__image" mode="aspectFit" src="{{item.tempFilePath}}" />
         </view>
         <view class="text-sec">

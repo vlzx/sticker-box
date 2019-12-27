@@ -143,6 +143,7 @@ page {
   background-color: white;
   justify-content: space-around;
   flex-flow: row wrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 .search-result-sec__result-sec {
@@ -167,9 +168,8 @@ page {
   width: 120rpx;
   border-radius: 999px;
   box-shadow: 4px 4px 8px 0px rgba(186, 201, 210, 1);
-  transition: box-shadow 0.1s;
 }
-.add-pic-sec:active{
+.add-pic-sec-hover{
   position: fixed;
   bottom: 60rpx;
   right: 60rpx;
@@ -225,7 +225,7 @@ page {
   align-items: center;
   justify-content: space-between;
 }
-.menu-item:not(:first-child):active{
+.menu-item-hover{
   display: flex;
   flex-direction: row;
   height: 110rpx;

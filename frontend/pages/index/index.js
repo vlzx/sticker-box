@@ -15,7 +15,6 @@ Page({
     searchPlaceholder: "",
     showMask: false, //控制隐藏显示遮罩层
     showPopupMenu: false, //控制隐藏显示菜单
-    lastSearchString: "",//用于展示搜索结果
     lastSearchSavedFileList:[],
     uploadingFilesAmount: 0,
     savedImageAmount: 0,
@@ -125,8 +124,8 @@ Page({
     var that = this
     console.log("confirmed")
     console.log("evalue:" + e.detail.value)
-    console.log("datavalue:" + this.data.lastSearchString)
-    if (!(e.detail.value === this.data.lastSearchString)) { //搜索文本与上次不同时进行查询
+    console.log("datavalue:" + app.globalData.lastSearchInfo.searchString)
+    if (!(e.detail.value === app.globalData.lastSearchInfo.searchString)) { //搜索文本与上次不同时进行查询
       console.log("搜索内容与上次不相同")
       wxp.request({
         url: app.httpsConfig.serverAddress + "/search",
@@ -203,9 +202,7 @@ Page({
         }
       })
     }
-    this.setData({
-      lastSearchString: e.detail.value
-    })
+    app.globalData.lastSearchInfo.searchString=e.detail.value
   },
   //响应点击菜单按钮弹出菜单和遮罩层
   onTapTopLeftIcon: function () {
