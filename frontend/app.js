@@ -3,6 +3,7 @@ const wxp = require('utils/util.js').wxp
 App({
   onLaunch: function () {
     let that = this
+    this.uploadingFileManager._this=this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -15,13 +16,13 @@ App({
         console.log("app point 1", res.data)
         that.globalData.userId = res.data
       })
-    wxp.getStorage({
-        key: "rejectAuthorization"
-      })
-      .then(res => {
-        console.log("app point 7", res.data)
-        that.globalData.rejectAuthorization = res.data
-      })
+    // wxp.getStorage({
+    //     key: "rejectAuthorization"
+    //   })
+    //   .then(res => {
+    //     console.log("app point 7", res.data)
+    //     that.globalData.rejectAuthorization = res.data
+    //   })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -46,6 +47,7 @@ App({
     })
   },
   uploadingFileManager: {
+    _this:{},
     uploadingFiles: {
       // "tempFilePaths":{
       // imageId:"",
@@ -95,7 +97,7 @@ App({
     //添加到上传文件队列中
     addToQueue: function (tempFilePaths) {
 
-      var that = this
+      let that = this._this
       console.log("app test point 1", that)
       // let existFileAmount = this.uploadingFiles.length
       // uploadingFiles.push(...(tempFilePaths.map((current, i) => {
@@ -106,8 +108,9 @@ App({
       //     iconType: "fa fa-spinner fa-spin"
       //   }
       // })))
-
+      console.log("app test point 20",tempFilePaths)
       for (let index = 0; index < tempFilePaths.length; index++) {
+        console.log()
         this.uploadingFiles[tempFilePaths[index]] = {
           imageId: "",
           complete: "uploading", //"uploading","success","uncertain"
@@ -119,7 +122,7 @@ App({
             filePath: tempFilePaths[index],
             name: "file",
             formData: {
-              "user": getApp().globalData.userId
+              "user": that.globalData.userId
             }
           })
           .then(resJson => {
@@ -173,8 +176,11 @@ App({
             // this.notify(completeString, {
             //   tempFilePath: tempFilePaths[index]
             // })
+          }).catch(()=>{
+            this.removeFromQueue(tempFilePaths[index])
+            this.notify("delete")
           }).finally(res => {
-            console.log("app test point 2")
+            console.log("app test point 2,发送了一个文件")
           })
       }
     },

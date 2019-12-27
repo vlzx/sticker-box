@@ -181,9 +181,7 @@ Page({
         duration: 2000
       })
       setTimeout(() => {
-        wx.navigateTo({
-          url: "../index/index"
-        })
+        wx.navigateBack({})
       }, 2000)
     }
   },

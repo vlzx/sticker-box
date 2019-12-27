@@ -16,8 +16,7 @@
     <view class="state-sec">
       <!-- image class="state-sec__icon" / -->
       <i class="state-sec__icon fa fa-cloud"></i>
-      <text class="state-sec__text">
-        {{uploadingFilesAmount==0?savedImageAmount==0?"尚无保存表情，点击右下按钮上传":"已保存图片 "+savedImageAmount:"正在上传图片数量 "+uploadingFilesAmount}}
+      <text class="state-sec__text">{{uploadingFilesAmount==0?savedImageAmount==0?"尚无保存表情，点击右下按钮上传":"已保存图片 "+savedImageAmount:"正在上传图片数量 "+uploadingFilesAmount}}
       </text>
     </view>
     <view class="search-sec">

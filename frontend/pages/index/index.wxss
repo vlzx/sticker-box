@@ -1,5 +1,5 @@
 /**index.wxss**/
-@import "../../res/font/font.wxss";
+/* @import "../../res/font/font.wxss"; */
 
 page {
   height: 100%;
@@ -82,17 +82,18 @@ page {
 }
 
 /* 状态区域 */
-.state-sec {
-  width: 100%;
-  display: flex;
+.state-sec{
+  /* width: 100%; */
+  /* display: flex; */
   flex: 1;
   margin-top: 5%;
   margin-left: 5%;
   flex-direction: row;
   align-self: flex-start;
+  /* align-items: center; */
 }
 
-.state-sec__icon {
+.state-sec__icon{
   height: 30rpx;
   width: 30rpx;
   color: #8D8E90;

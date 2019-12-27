@@ -341,12 +341,14 @@ Page({
         data: 0
       })
     }
-    wxp.chooseMessageFile({
-      count: 10,
-      type: "image"
-    }).then(res => {
-      app.uploadingFileManager.addToQueue(res.tempFiles.map(current => current.path))
-    })
+    if(this.data.longPressSetting){
+      wxp.chooseMessageFile({
+        count: 10,
+        type: "image"
+      }).then(res => {
+        app.uploadingFileManager.addToQueue(res.tempFiles.map(current => current.path))
+      })
+    }
   },
   //响应点击图片事件,预览图片
   onTapPreviewImage: function (e) {
@@ -367,7 +369,6 @@ Page({
       })
       app.globalData.longPressSetting = true
     }
-
   }
   // getUserInfo: function (e) {
   //   console.log(e)
