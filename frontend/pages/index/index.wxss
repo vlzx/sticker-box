@@ -83,6 +83,8 @@ page {
 
 /* 状态区域 */
 .state-sec {
+  width: 100%;
+  display: flex;
   flex: 1;
   margin-top: 5%;
   margin-left: 5%;
@@ -95,8 +97,7 @@ page {
   width: 30rpx;
   color: #8D8E90;
 }
-
-.state-sec__text {
+.state-sec__text{
   padding-left: 10rpx;
   color: #8D8E90;
 }
@@ -124,7 +125,6 @@ page {
   border: 1px solid rgba(75, 63, 63, 0);
   padding-left: 10px;
 }
-
 .search-sec__input:hover {
   background-color: white;
   height: 80rpx;
@@ -132,7 +132,7 @@ page {
   border-radius: 4px;
   color: rgba(16, 16, 16, 1);
   box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
-  border: 2px solid rgba(14, 54, 230, 0.6);
+  border: 2px solid rgba(14,54,230,0.6);
   padding-left: 10px;
 }
 
@@ -156,8 +156,7 @@ page {
   border-radius: 6px;
   border: 1px solid rgba(187, 187, 187, 0.3);
 }
-
-.search-result-scrosec__background-sec {
+.search-result-scrosec__background-sec{
   width: 100%;
   height: 100%;
   display: flex;
@@ -166,21 +165,17 @@ page {
   justify-content: center;
 }
 
-.search-result-scrosec__background-img {}
-
-.search-result-scrosec__background-text {
+.search-result-scrosec__background-text{
   text-align: center;
   font-size: 30rpx;
   font-weight: bold;
   color: #8D8E90;
 }
-
 .search-result-sec__result-pic {
   width: 100%;
   height: 100%;
-
+  
 }
-
 /*添加图片按钮*/
 .add-pic-sec {
   position: fixed;
@@ -191,8 +186,7 @@ page {
   border-radius: 999px;
   box-shadow: 4px 4px 8px 0px rgba(186, 201, 210, 1);
 }
-
-.add-pic-sec-hover {
+.add-pic-sec-hover{
   position: fixed;
   bottom: 60rpx;
   right: 60rpx;
@@ -248,8 +242,7 @@ page {
   align-items: center;
   justify-content: space-between;
 }
-
-.menu-item-hover {
+.menu-item-hover{
   display: flex;
   flex-direction: row;
   height: 110rpx;
@@ -265,11 +258,9 @@ page {
   font-size: 15px;
   font-weight: bold;
 }
-
-.menu-item__switch {
+.menu-item__switch{
   margin-right: 20rpx;
 }
-
 .menu-item__icon {
   margin-right: 30rpx;
   font-weight: normal;
