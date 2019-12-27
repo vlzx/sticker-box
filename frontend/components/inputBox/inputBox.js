@@ -43,8 +43,8 @@ Component({
 
   attached: function () {
     var res = wx.getSystemInfoSync()
-    console.log("ib测试点4：", this.properties.initText)
-    console.log("ib测试点5：", this.properties.initimageId)
+    //console.log("ib测试点4：", this.properties.initText)
+    //console.log("ib测试点5：", this.properties.initimageId)
     this.setData({
       modalBottom: this.data.multiline ? (res.screenHeight - 234).toString() : (res.screenHeight - 178).toString(),
       modalHeight: this.data.multiline ? '468' : '355',
@@ -56,7 +56,7 @@ Component({
   methods: {
     // 监听用户输入
     onInput: function (e) {
-      console.log("inputBox:测试点3：", e)
+      //console.log("inputBox:测试点3：", e)
       this.setData({
         text: e.detail.value
       })
@@ -77,7 +77,7 @@ Component({
     onCancelTap: function () {
       var that = this
       // this.hideInputBox()
-      console.log("inputBpx:测试点2:")
+      //console.log("inputBpx:测试点2:")
       this.triggerEvent('inputCancel', {
         text: that.data.text,
         imageId: that.properties.initimageId
@@ -91,8 +91,8 @@ Component({
     onConfirmTap: function () {
       var that = this
       // this.hideInputBox()
-      console.log("inputBpx:测试点1:", that.data.text)
-      console.log("ib测试点6:", that.data.imageId)
+      //console.log("inputBpx:测试点1:", that.data.text)
+      //console.log("ib测试点6:", that.data.imageId)
       this.triggerEvent('inputConfirm', {
         text: that.data.text,
         imageId: that.data.imageId,

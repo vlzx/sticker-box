@@ -33,7 +33,7 @@ Page({
 
   //响应点击返回按钮返回上一页
   onTapTopLeftIcon: function () {
-    console.log("rest")
+    //console.log("rest")
     wx.navigateTo({
       url: "../index/index"
     })
@@ -43,7 +43,7 @@ Page({
     //TODO
     let that = this
     let index = e.currentTarget.dataset.index
-    console.log(e.currentTarget.dataset.index)
+    //console.log(e.currentTarget.dataset.index)
     this.setData({
       // inputboxValue:{
       //   text:that.data.uncertainFiles[index].text,
@@ -54,16 +54,16 @@ Page({
       initTempFilePath: that.data.uncertainFiles[index].tempFilePath,
       currentModalIndex: index
     })
-    console.log("uq测试点6：", that.data.uncertainFiles[index].text)
-    console.log("uq测试点7：", that.data.uncertainFiles[index].imageId)
-    console.log("uq测试点8：", that.data.uncertainFiles[index].tempFilePath)
+    //console.log("uq测试点6：", that.data.uncertainFiles[index].text)
+    //console.log("uq测试点7：", that.data.uncertainFiles[index].imageId)
+    //console.log("uq测试点8：", that.data.uncertainFiles[index].tempFilePath)
     this.setData({
       showInputbox: true
     })
   },
   onInputConfirm: function (e) {
     let that = this
-    console.log("uq:测试点1:", e.detail)
+    //console.log("uq:测试点1:", e.detail)
     this.setData({
       showInputbox: false
     })
@@ -76,7 +76,7 @@ Page({
       },
       method: 'POST',
       success: (result) => {
-        console.log("uq测试点3：", result)
+        //console.log("uq测试点3：", result)
         if (that.data.currentModalIndex != -1) {
           that.data.uncertainFiles.splice(that.data.currentModalIndex, 1)
           that.setData({
@@ -98,7 +98,7 @@ Page({
   },
   //
   onInputCancel: function (e) {
-    console.log("uq:测试点2:", e.detail)
+    //console.log("uq:测试点2:", e.detail)
     this.setData({
       showInputbox: false
     })
@@ -171,10 +171,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log("eee", this.data.uncertainFiles)
+    //console.log("eee", this.data.uncertainFiles)
 
     if (this.data.uncertainFiles.length == 0) {
-      console.log("aaa")
+      //console.log("aaa")
       wx.showToast({
         title: "没有表情需要手动更新文本，快去上传表情吧",
         icon: "none",

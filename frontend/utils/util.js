@@ -7,8 +7,8 @@ const wxp = (() => {
   // promisify all wx's api
   let tmpwxp = {}
   promisifyAll(wx, tmpwxp)
-  console.log(tmpwxp.getSystemInfoSync()) //TODO
-  tmpwxp.getSystemInfo().then(console.log) //TODO 
+  //console.log(tmpwxp.getSystemInfoSync()) //TODO
+  //tmpwxp.getSystemInfo().then() //TODO 
   return tmpwxp
 })()
 

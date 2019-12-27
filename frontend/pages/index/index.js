@@ -56,7 +56,7 @@ Page({
           })
         },
         "upload": function (data) {
-          console.log("test")
+          //console.log("test")
           that.setData({
             uploadingFilesAmount: app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
           })
@@ -67,7 +67,7 @@ Page({
           })
         },
         "success": function (data) {
-          console.log("index test point 2")
+          //console.log("index test point 2")
           that.setData({
             uploadingFilesAmount: app.uploadingFileManager.getObjectNotNullLength(app.uploadingFileManager.uploadingFiles)
           })
@@ -103,7 +103,7 @@ Page({
     //TODO 文本生成
     let greetMsgList = ["在找表情？搜索一下吧~", "上传表情，自动识别文本", "轻松上传保存，快速搜索"]
     let hour = new Date().getHours()
-    console.log("index test point 8", hour)
+    //console.log("index test point 8", hour)
     let period = ""
     if (hour < 4) period = '夜深了，晚安zzZ🌙'
     else if (hour < 8) period = 'Hi,早上好~☀'
@@ -126,11 +126,11 @@ Page({
   //搜索
   onConfirmSearch: function (e) {
     var that = this
-    console.log("confirmed")
-    console.log("evalue:" + e.detail.value)
-    console.log("datavalue:" + app.globalData.lastSearchInfo.searchString)
+    //console.log("confirmed")
+    //console.log("evalue:" + e.detail.value)
+    //console.log("datavalue:" + app.globalData.lastSearchInfo.searchString)
     if (!(e.detail.value === app.globalData.lastSearchInfo.searchString)) { //搜索文本与上次不同时进行查询
-      console.log("搜索内容与上次不相同")
+      //console.log("搜索内容与上次不相同")
       wxp.request({
         url: app.httpsConfig.serverAddress + "/search",
         data: {
@@ -151,10 +151,10 @@ Page({
         wxp.removeStorage({
           key: "lastSearchInfo"
         })
-        console.log("测试that:" + (that == this))
-        console.log(res)
+        //console.log("测试that:" + (that == this))
+        //console.log(res)
         let resList = res.data
-        console.log(resList)
+        //console.log(resList)
         let resultAmount = resList.length
         let completeFlagList = {
           flagList: new Array(resultAmount),
@@ -167,7 +167,7 @@ Page({
             return true
           }
         }
-        // console.log(res)
+        // //console.log(res)
         for (let index = 0; index < resultAmount; index++) {
           let url = resList[index]
           wx.downloadFile({
@@ -177,7 +177,7 @@ Page({
                 tempFilePath: res.tempFilePath,
                 // complete: function (res) {
                 //   completeFlagList[index] = true
-                //   console.log("complete")
+                //   //console.log("complete")
                 //   if (completeFlagList.allComplete()) {
                 //     app.globalData.lastSearchInfo.searchString = e.detail.value
                 //     wxp.setStorage({
@@ -187,7 +187,7 @@ Page({
                 //   }
                 // }
               }).then(res => {
-                console.log("测试点1：", that.data.lastSearchSavedFileList)
+                //console.log("测试点1：", that.data.lastSearchSavedFileList)
                 //TODO 改为即使展示，后台下载
                 // that.data.lastSearchSavedFileList.push(res.savedFilePath)
                 // that.setData({ //更新图片显示数据
@@ -198,7 +198,7 @@ Page({
                 })
               }).finally(res => {
                 completeFlagList[index] = true
-                console.log("complete")
+                //console.log("complete")
                 //TODO 第一次登陆时查询 是否有uid，有的话查是否有历史记录，有的话展示
                 if (completeFlagList.allComplete()) {
                   app.globalData.lastSearchInfo.searchString = e.detail.value
@@ -217,7 +217,7 @@ Page({
   },
   //响应点击菜单按钮弹出菜单和遮罩层
   onTapTopLeftIcon: function () {
-    console.log(11)
+    //console.log(11)
     this.setData({
       showMask: true,
       showPopupMenu: true
@@ -237,7 +237,7 @@ Page({
   },
   //响应点击遮罩层关闭菜单和遮罩层
   onTapMask: function () {
-    console.log(11)
+    //console.log(11)
     this.setData({
       showMask: false,
       showPopupMenu: false
@@ -247,13 +247,13 @@ Page({
   onTapUploadImage: function () {
     //TODO 首次点击上传图片按钮提示获取用户名
     // if(!(app.globalData.userInfo)){
-    //   console.log("wdnmd")
+    //   //console.log("wdnmd")
     //   wx.authorize({
     //     scope:"scope.userInfo",
     //     success:function(){
     //       wx.getUserInfo({
     //         success: res => {
-    //           console.log("index test point 7")
+    //           //console.log("index test point 7")
     //           // 可以将 res 发送给后台解码出 unionId
     //           app.globalData.userInfo = res.userInfo
     //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -266,7 +266,7 @@ Page({
     //     },
     //     fail:function(){
     //       //如果拒绝授权用户信息，则设置【用户拒绝授权信息标识】
-    //       console.log("cao!")
+    //       //console.log("cao!")
     //       app.globalData.rejectAuthorization=true
     //       wx.setStorageSync({
     //         key:"rejectAuthorization",
@@ -284,7 +284,7 @@ Page({
         data: 0
       })
     }
-    // console.log(wxp)
+    // //console.log(wxp)
     wxp.chooseImage({
         sizeType: "compressed"
       })
@@ -301,7 +301,7 @@ Page({
         //       name: 'file'
         //     })
         //     .then((res) => {
-        //       console.log(res)
+        //       //console.log(res)
         //       app.globalData.upLoadImage[index]
         //     })
         // }
@@ -323,10 +323,10 @@ Page({
     //       name: 'file',
     //       success:function(res){
     //         const data=res.data
-    //         console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
+    //         //console.log("上传图片(小程序端临时地址):" + that.data.uploadImageList[0]+"\n返回数据：\n"+data)
     //       },
     //       fail:function(res){
-    //         console.log(res)
+    //         //console.log(res)
     //       }
     //     })
     //   }
@@ -371,7 +371,7 @@ Page({
     }
   }
   // getUserInfo: function (e) {
-  //   console.log(e)
+  //   //console.log(e)
   //   app.globalData.userInfo = e.detail.userInfo
   //   this.setData({
   //     userInfo: e.detail.userInfo,

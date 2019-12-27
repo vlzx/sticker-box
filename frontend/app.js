@@ -13,26 +13,26 @@ App({
         key: "userId"
       })
       .then(res => {
-        console.log("app point 1", res.data)
+        //console.log("app point 1", res.data)
         that.globalData.userId = res.data
       })
     // wxp.getStorage({
     //     key: "rejectAuthorization"
     //   })
     //   .then(res => {
-    //     console.log("app point 7", res.data)
+    //     //console.log("app point 7", res.data)
     //     that.globalData.rejectAuthorization = res.data
     //   })
     // 获取用户信息
     wx.getSetting({
       success: res => {
-        console.log("app test point 4")
+        //console.log("app test point 4")
         if (res.authSetting['scope.userInfo']) {
-          console.log("app test point 4")
+          //console.log("app test point 4")
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log("app test point 5")
+              //console.log("app test point 5")
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -98,7 +98,7 @@ App({
     addToQueue: function (tempFilePaths) {
 
       let that = this._this
-      console.log("app test point 1", that)
+      //console.log("app test point 1", that)
       // let existFileAmount = this.uploadingFiles.length
       // uploadingFiles.push(...(tempFilePaths.map((current, i) => {
       //   return {
@@ -108,9 +108,9 @@ App({
       //     iconType: "fa fa-spinner fa-spin"
       //   }
       // })))
-      console.log("app test point 20",tempFilePaths)
+      //console.log("app test point 20",tempFilePaths)
       for (let index = 0; index < tempFilePaths.length; index++) {
-        console.log()
+        //console.log()
         this.uploadingFiles[tempFilePaths[index]] = {
           imageId: "",
           complete: "uploading", //"uploading","success","uncertain"
@@ -129,7 +129,7 @@ App({
             let res = JSON.parse(resJson.data)
             if ((res => {
                 //TODO判断是否需要手动输入，不需要返回true，需要返回false 
-                console.log("app test point 3", res)
+                //console.log("app test point 3", res)
                 if (res.level > 0.96) {
                   return true
                 } else {
@@ -138,19 +138,19 @@ App({
               })(res)) {
               this.removeFromQueue(tempFilePaths[index])
               let tmpSavedImageAmount = wx.getStorageSync("savedImageAmount")
-              console.log("app test point 9", wx.getStorageSync("savedImageAmount"))
+              //console.log("app test point 9", wx.getStorageSync("savedImageAmount"))
               wxp.setStorage({
                 key: "savedImageAmount",
                 data: tmpSavedImageAmount + 1
               })
               this.notify("success", {})
             } else {
-              console.log("app test point 10", res)
+              //console.log("app test point 10", res)
               that.uncertainFiles[tempFilePaths[index]] = {
                 imageId: res.image,
                 text: res.content
               }
-              console.log("app test point 8", that.uncertainFiles[tempFilePaths[index]])
+              //console.log("app test point 8", that.uncertainFiles[tempFilePaths[index]])
               this.removeFromQueue(tempFilePaths[index])
               this.notify("uncertain", {
                 tempFilePath: tempFilePaths[index],
@@ -180,7 +180,7 @@ App({
             this.removeFromQueue(tempFilePaths[index])
             this.notify("delete")
           }).finally(res => {
-            console.log("app test point 2,发送了一个文件")
+            //console.log("app test point 2,发送了一个文件")
           })
       }
     },
@@ -238,14 +238,14 @@ App({
         })
       })
       .then(res => {
-        console.log(res)
+        //console.log(res)
         that.globalData.userId = res.data.user
         wx.setStorage({
           key: "userId",
           data: res.data.user,
           success: function () {
             //TODO 测试用，优化时删除
-            console.log("index point 1", res.data.user)
+            //console.log("index point 1", res.data.user)
           }
         })
       })

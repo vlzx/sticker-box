@@ -16,7 +16,7 @@ Page({
 
   //响应点击返回按钮返回上一页
   onTapTopLeftIcon: function () {
-    console.log("fuck")
+    //console.log("fuck")
     wx.navigateTo({
       url: "../index/index"
     })
