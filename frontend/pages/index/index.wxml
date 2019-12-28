@@ -20,16 +20,16 @@
       </text>
     </view>
     <view class="search-sec">
-      <image class="search-sec__icon" />
+      <i class="search-sec__icon fa fa-search" ></i>
       <input class="search-sec__input" placeholder="{{searchPlaceholder}}" confirm-type="search" bindconfirm="onConfirmSearch" />
     </view>
   </view>
   <scroll-view scroll-y="true" enable-flex="true" class="search-result-scrosec">
     <view wx:if="{{lastSearchSavedFileList.length==0}}" class="search-result-scrosec__background-sec">
       <image mode="aspectFit" class="search-result-scrosec__background-img" src="../../res/image/backgroundImg.png" />
-      <text class="search-result-scrosec__background-text">点击按钮上传表情</text>
+      <text class="search-result-scrosec__background-text">点击按钮上传表情\n即可搜索关键词</text>
     </view>
-    <view wx:for="{{lastSearchSavedFileList}}" wx:key="*this" class="search-result-sec__result-sec animated fadeInUp fast" data-image-id="{{index}}" catch:tap="onTapPreviewImage">
+    <view wx:for="{{lastSearchSavedFileList}}" wx:key="*this" class="search-result-sec__result-sec animated fadeInUp fast" data-image-index="{{index}}" catch:tap="onTapPreviewImage">
       <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>

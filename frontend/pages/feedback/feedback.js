@@ -10,18 +10,41 @@ Page({
     navbarConfig: {
       iconType: "fa fa-chevron-left",
       title: "反馈",
-      statusBarHeight: app.globalData.statusBarHeight
+      statusBarHeight: app.globalData.statusBarHeight,
+      feedbackValue:"",
+      emailValue:""
     },
   },
 
   //响应点击返回按钮返回上一页
   onTapTopLeftIcon: function () {
     //console.log("fuck")
-    wx.navigateTo({
-      url: "../index/index"
+    wx.navigateBack({})
+  },
+  onTapConfirm:function(){
+    // let that=this
+    // wx.request({
+    //   url:app.httpsConfig.serverAddress+"/feedback",
+    //   data:{
+    //     email:that.data.emailValue,
+    //     feedback:that.data.feedbackValue
+    //   },
+    //   method:"POST"
+    // })
+    wx.showToast({
+      title:"上传成功"
+    })
+    this.setData({
+      feedbackValue:"",
+      emailValue:""
     })
   },
-
+  onFeedbackInput:function(e){
+    this.data.feedbackValue=e.detail.value
+  },
+  onEmailInput: function (e) {
+    this.data.emailValue=e.detail.value
+  },
   /**
    * 生命周期函数--监听页面加载
    */

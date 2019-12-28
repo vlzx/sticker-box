@@ -12,7 +12,7 @@ Page({
       title: "",
       statusBarHeight: app.globalData.statusBarHeight,
     },
-    searchPlaceholder: "",
+    searchPlaceholder: "关键字搜索",
     showMask: false, //控制隐藏显示遮罩层
     showPopupMenu: false, //控制隐藏显示菜单
     lastSearchSavedFileList: [],
@@ -286,6 +286,7 @@ Page({
     }
     // //console.log(wxp)
     wxp.chooseImage({
+        count:2,
         sizeType: "compressed"
       })
       .then((res) => {
@@ -343,7 +344,7 @@ Page({
     }
     if(this.data.longPressSetting){
       wxp.chooseMessageFile({
-        count: 10,
+        count: 2,
         type: "image"
       }).then(res => {
         app.uploadingFileManager.addToQueue(res.tempFiles.map(current => current.path))
@@ -352,9 +353,10 @@ Page({
   },
   //响应点击图片事件,预览图片
   onTapPreviewImage: function (e) {
+    console.log("index test point 23",e.currentTarget.dataset.imageIndex)
     wx.previewImage({
       urls: this.data.lastSearchSavedFileList,
-      current: e.currentTarget.dataset.imageId
+      current: this.data.lastSearchSavedFileList[e.currentTarget.dataset.imageIndex]
     })
   },
   longPressSettingChanged: function () {

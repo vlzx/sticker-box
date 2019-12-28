@@ -62,7 +62,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  align-content: space-around;
+  align-content: center;
   width: 72%;
   flex: 4;
 }
@@ -71,8 +71,12 @@ page {
 .title-sec {
   margin-top: 15%;
   margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+
   flex: 2;
   align-self: flex-start;
+  justify-content: center;
 }
 
 .title-sec__text {
@@ -86,7 +90,7 @@ page {
   /* width: 100%; */
   /* display: flex; */
   flex: 1;
-  margin-top: 5%;
+  /* margin-top: 5%; */
   margin-left: 5%;
   flex-direction: row;
   align-self: flex-start;
@@ -105,28 +109,52 @@ page {
 
 /* 搜索框区域 */
 .search-sec {
-  flex: 3;
+  /* flex: 3; */
   width: 100%;
-  margin-bottom: 50rpx;
+  margin-bottom: 100rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
+  border: 2px solid rgba(75, 63, 63, 0);
+  align-items: center;
+}
+.search-sec:hover {
+  /* flex: 3; */
+  width: 100%;
+  margin-bottom: 100rpx;
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
+  border: 2px solid rgba(14,54,230,0.6);
+  align-items: center;
 }
 
 
 .search-sec__icon {
-  height: 40rpx;
-  width: 40rpx;
+  width: 60rpx;
+  font-size: 18px;
+  text-align: center;
+  color: #8D8E90;
+  /* position: relative;
+  left: 20px; */
 }
 
 .search-sec__input {
   background-color: white;
+  width: 100%;
   height: 80rpx;
   line-height: 23px;
-  border-radius: 4px;
+  /* border-radius: 4px;
   color: rgba(16, 16, 16, 1);
   box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
   border: 1px solid rgba(75, 63, 63, 0);
-  padding-left: 10px;
+  padding-left: 10px; */
 }
-.search-sec__input:hover {
+/* .search-sec__input:hover {
   background-color: white;
   height: 80rpx;
   line-height: 23px;
@@ -134,8 +162,7 @@ page {
   color: rgba(16, 16, 16, 1);
   box-shadow: 5px 5px 10px -5px rgba(186, 201, 210, 1);
   border: 2px solid rgba(14,54,230,0.6);
-  padding-left: 10px;
-}
+  padding-left: 10px; */
 
 /*内容容器-搜索结果区域 
 ----------------------------*/
@@ -185,7 +212,7 @@ page {
   height: 120rpx;
   width: 120rpx;
   border-radius: 999px;
-  box-shadow: 4px 4px 8px 0px rgba(186, 201, 210, 1);
+  box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
 .add-pic-sec-hover{
   position: fixed;
@@ -194,7 +221,7 @@ page {
   height: 120rpx;
   width: 120rpx;
   border-radius: 999px;
-  box-shadow: 4px 4px 8px -5px rgba(186, 201, 210, 1);
+  box-shadow: 4px 4px 8px -5px rgba(0, 0, 0, 0.25);
 }
 
 

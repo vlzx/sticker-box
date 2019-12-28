@@ -118,7 +118,7 @@ App({
         }
         this.notify("upload", {})
         wxp.uploadFile({
-            url: getApp().httpsConfig.serverAddress + '/upload',
+            url: that.httpsConfig.serverAddress + '/upload',
             filePath: tempFilePaths[index],
             name: "file",
             formData: {
@@ -145,12 +145,14 @@ App({
               })
               this.notify("success", {})
             } else {
-              //console.log("app test point 10", res)
-              that.uncertainFiles[tempFilePaths[index]] = {
+              console.log("app test point 10", res)
+              console.log("app test point 11", this)
+
+              this.uncertainFiles[tempFilePaths[index]] = {
                 imageId: res.image,
                 text: res.content
               }
-              //console.log("app test point 8", that.uncertainFiles[tempFilePaths[index]])
+              console.log("app test point 8", this.uncertainFiles[tempFilePaths[index]])
               this.removeFromQueue(tempFilePaths[index])
               this.notify("uncertain", {
                 tempFilePath: tempFilePaths[index],
@@ -176,11 +178,12 @@ App({
             // this.notify(completeString, {
             //   tempFilePath: tempFilePaths[index]
             // })
-          }).catch(()=>{
+          }).catch(e=>{
             this.removeFromQueue(tempFilePaths[index])
             this.notify("delete")
+            console.log("app test point 21",e)
           }).finally(res => {
-            //console.log("app test point 2,发送了一个文件")
+            console.log("app test point 2,发送了一个文件")
           })
       }
     },

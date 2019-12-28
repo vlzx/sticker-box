@@ -10,7 +10,7 @@ Page({
   data: {
     navbarConfig: {
       iconType: "fa fa-chevron-left",
-      title: "上传队列",
+      title: "手动更新队列",
       statusBarHeight: app.globalData.statusBarHeight,
     },
     uncertainFiles: [],
@@ -84,6 +84,10 @@ Page({
           })
         }
         app.uploadingFileManager.removeFromUncertain(e.detail.tempFilePath)
+        wx.showToast({
+          title:"更新成功~",
+          dutation:1500
+        })
         let tmpSavedImageAmount = wx.getStorageSync("savedImageAmount")
         wxp.setStorage({
           key: "savedImageAmount",
@@ -111,14 +115,18 @@ Page({
    */
   onLoad: function (options) {
     let uncertainFilePaths = Object.getOwnPropertyNames(app.uploadingFileManager.uncertainFiles)
+    let tempUncertainFiles=[]
+    for(let index=0;index<uncertainFilePaths.length;index++){
+      if(app.uploadingFileManager.uncertainFiles[uncertainFilePaths[index]]){
+        tempUncertainFiles.push({
+          imageId: app.uploadingFileManager.uncertainFiles[uncertainFilePaths[index]].imageId,
+          tempFilePath: uncertainFilePaths[index],
+          text: app.uploadingFileManager.uncertainFiles[uncertainFilePaths[index]].text
+        })
+      }
+    }
     this.setData({
-      uncertainFiles: uncertainFilePaths.map((current) => {
-        return {
-          imageId: app.uploadingFileManager.uncertainFiles[current].imageId,
-          tempFilePath: current,
-          text: app.uploadingFileManager.uncertainFiles[current].text
-        }
-      })
+      uncertainFiles: tempUncertainFiles
     })
 
 
@@ -178,7 +186,8 @@ Page({
       wx.showToast({
         title: "没有表情需要手动更新文本，快去上传表情吧",
         icon: "none",
-        duration: 2000
+        duration: 2000,
+        mask:true
       })
       setTimeout(() => {
         wx.navigateBack({})
