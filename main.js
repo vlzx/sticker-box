@@ -100,19 +100,24 @@ app.post('/upload', function(req, res){
         
         let results = await ocr.getResult(pic)
         let keyword = ''
-        let average = 0
+        let min = 0
         // 拼接文本、计算平均准确率
-        results['words_result'].forEach(element => {
-            keyword += element['words']
-            keyword += ';'
-            average += element['probability']['average']
-        })
-        average /= results['words_result_num']
-
-        args = {user: user, image: id, content: keyword, level: average}
+        if(results['words_result'].length) {
+            results['words_result'].forEach(element => {
+                keyword += element['words']
+                keyword += ';'
+                min += element['probability']['min']
+            })
+            min /= results['words_result_num']
+        } else {
+            keyword = ''
+            min = -1
+        }
+        
+        args = {user: user, image: id, content: keyword, level: min}
         let v = await query.insertKeyword(conn, args)
         if(v===0){
-            res.json({user: user, image: id, content: keyword, level: average, code: 0})
+            res.json({user: user, image: id, content: keyword, level: min, code: 0})
         }
     })
 })
