@@ -1,0 +1,18 @@
+<!-- Pages/feedback/feedback.wxml -->
+<view class="container">
+  <view class="navbar " style="padding-top:{{navbarConfig.statusBarHeight}}px">
+    <view class="navbar__menu-btn-sec " catchtap="onTapTopLeftIcon">
+      <i class="{{navbarConfig.iconType}} navbar__menu-icon"></i>
+    </view>
+    <view wx:if="{{navbarConfig.title}}" class="navbar__title-sec">
+      <text class="navbar__title-text">{{navbarConfig.title}}</text>
+    </view>
+    <view class="placeholder-view navbar__menu-btn-sec"></view>
+  </view>
+  <textarea class='feedback' placeholder-class='feedback-placeholder' value="{{feedbackValue}}"  placeholder='请写下吐槽或改进意见,我们将不断改进~' focus="{{true}}" bindinput="onFeedbackInput"></textarea>
+  <!-- <view class='email'>
+    <text class='email-title'>联系邮箱</text> -->
+  <input class='email-input' placeholder-class='email-placeholder' value="{{emailValue}}"  placeholder='请输入邮箱方便联系' bindinput="onEmailInput"></input>
+  <!-- </view> -->
+  <button type='primary' bindtap="onTapConfirm">提交</button>
+</view>

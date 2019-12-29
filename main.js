@@ -1,41 +1,38 @@
+let conf = require('./config')
 let express = require('express')
 let https = require('https')
 let fs = require('fs')
 let request = require('request')
-let mysql = require('mysql')
-let formidable = require('formidable')
-let conf = require('./config')
-let query = require('./query')
-let ocr = require('./ocr')
+// let mysql = require('mysql')
 
-// 读取HTTPS证书和密钥
 let cert = fs.readFileSync(conf.certPath, 'utf8')
 let key = fs.readFileSync(conf.keyPath, 'utf8')
 
-// express中间件
 let app = express()
-// mysql数据库连接
-let conn = mysql.createConnection(conf.dbConn)
+// let conn = mysql.createConnection(conf.dbConn)
 
+// let router = express.Router()
 // app.use(function (req, res, next) {
 //     res.set('Access-Control-Allow-Origin', '*')
 //     next()
 // })
 
+// function getUUID(sess){
+//     conn.query('SELECT uuid FROM user WHERE openid=?;', sess.openid, function(err, rows){
+//         if(err) throw err
+//         if(!rows.length){
+//             console.log('user not exists')
+            
+//         }
 
-app.use(express.json())
-// application/x-www-form-urlencoded
-app.use(express.urlencoded({extended: true}))
-// 静态文件目录
-app.use('/static', express.static(__dirname + '/public'))
+//     })
+// }
 
-// 根据（用户code），通过微信官方API获取（用户openid和session_key）
-// 返回（登录结果状态码：登录成功，登录失败）和（用户uuid）
 app.get('/login', function(req, res){
     let js_code = req.query.code
     console.log({js_code: js_code})
     let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${conf.appid}&secret=${conf.secret}&js_code=${js_code}&grant_type=authorization_code`
-    request.get(url, async function(err, response, data){
+    request.get(url, function(err, response, data){
         if(err) throw err
         let sess = JSON.parse(data)
         // console.log(sess)
@@ -131,6 +128,8 @@ app.get('/', function(req, res){
 })
 
 
+
+// app.use(express.static(__dirname))
 
 let server = https.createServer({cert, key}, app)
 

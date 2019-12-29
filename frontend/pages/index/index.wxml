@@ -11,45 +11,44 @@
   </view>
   <view class="header-sec">
     <view class="title-sec">
-      <text class="title-sec__text">Hi,{{nickname}}\n晚上好~搜索一下吧~</text>
+      <text class="title-sec__text">{{greetMsg.line1}}\n{{greetMsg.line2}}</text>
     </view>
     <view class="state-sec">
       <!-- image class="state-sec__icon" / -->
-      <i class="fa fa-hashtag"></i>
-      <text class="state-sec__text">{{uploadingFilesAmount==0?"已保存图片 "+picAmount:"正在上传图片数量 "+uploadingFilesAmount}}</text>
+      <i class="state-sec__icon fa fa-cloud"></i>
+      <text class="state-sec__text">{{uploadingFilesAmount==0?savedImageAmount==0?"尚无保存表情，点击右下按钮上传":"已保存图片 "+savedImageAmount:"正在上传图片数量 "+uploadingFilesAmount}}
+      </text>
     </view>
     <view class="search-sec">
-      <image class="search-sec__icon" />
-      <input class="search-sec__input" placeholder="{{searchPlaceholder}}" confirm-type="search" bindconfirm="onConfirmSearch"/>
+      <i class="search-sec__icon fa fa-search" ></i>
+      <input class="search-sec__input" placeholder="{{searchPlaceholder}}" confirm-type="search" bindconfirm="onConfirmSearch" />
     </view>
   </view>
   <scroll-view scroll-y="true" enable-flex="true" class="search-result-scrosec">
-    <!-- <view class="search-result-sec__result-sec">
-      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/微信图片_20181025190245.jpg" />
+    <view wx:if="{{lastSearchSavedFileList.length==0}}" class="search-result-scrosec__background-sec">
+      <image mode="aspectFit" class="search-result-scrosec__background-img" src="../../res/image/backgroundImg.png" />
+      <text class="search-result-scrosec__background-text">点击按钮上传表情\n即可搜索关键词</text>
     </view>
-    <view class="search-result-sec__result-sec">
-      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/微信图片_20181025190245.jpg" />
-    </view>
-    <view class="search-result-sec__result-sec">
-      <image class="search-result-sec__result-pic" mode="aspectFit" src="../../res/image/微信图片_20181025190245.jpg" />
-    </view > -->
-    <view wx:for="{{lastSearchSavedFileList}}" class="search-result-sec__result-sec" data-image-id="{{index}}" catch:tap="onTapPreviewImage">
+    <view wx:for="{{lastSearchSavedFileList}}" wx:key="*this" class="search-result-sec__result-sec animated fadeInUp fast" data-image-index="{{index}}" catch:tap="onTapPreviewImage">
       <image class="search-result-sec__result-pic" mode="aspectFill" src="{{item}}" />
     </view>
   </scroll-view>
-  <view class="add-pic-sec">
-    <image class="add-pic-btn" mode="aspectFit" src="../../res/image/add-pic-btn.png" catchtap="onTapUploadImage" />
+  <view class="add-pic-sec" hover-class="add-pic-sec-hover" hover-stay-time="100">
+    <image class="add-pic-btn" mode="aspectFit" src="../../res/image/add-pic-btn.png" catchtap="onTapUploadImage" catch:longpress="onLongPressUploadImage" />
   </view>
 </view>
 <view class="mask" hidden="{{!showMask}}" catchtap="onTapMask"></view>
-<view class="popup-menu" hidden="{{!showPopupMenu}}">
+<view class="popup-menu animated fadeIn" hidden="{{!showPopupMenu}}">
   <view class="menu-item">
     <text class="menu-item__text">长按从聊天选取图片</text>
+    <switch class="menu-item__switch" checked="{{longPressSetting}}" bindchange="longPressSettingChanged" />
   </view>
-  <view class="menu-item" catch:tap="onTapQueue">
+  <view class="menu-item" hover-class="menu-item-hover" hover-stay-time="100" catch:tap="onTapQueue">
     <text class="menu-item__text">手动更新</text>
+    <i class="menu-item__icon fa fa-angle-right"></i>
   </view>
-  <view class="menu-item" catch:tap="onTapFeedback">
+  <view class="menu-item" hover-class="menu-item-hover" hover-stay-time="100" catch:tap="onTapFeedback">
     <text class="menu-item__text">帮助与反馈</text>
+    <i class="menu-item__icon fa fa-angle-right"></i>
   </view>
 </view>

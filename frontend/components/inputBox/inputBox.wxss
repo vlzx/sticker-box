@@ -52,7 +52,7 @@
   position: absolute;
   top: 130rpx;
   align-self: center;
-  background-color: #eee;
+  background-color: white;
   width: 490rpx;
   height: 195rpx;
   padding: 3rpx 5rpx;
